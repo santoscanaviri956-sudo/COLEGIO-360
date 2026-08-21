@@ -83,6 +83,7 @@
       border-radius: 6px;
       font-weight: 700;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .btn-portal:hover {
@@ -194,7 +195,6 @@
       gap: 1.5rem;
     }
 
-    /* Tarjetas de Escuela (#1E1B4B) */
     .school-card {
       background-color: #1E1B4B;
       border-radius: 12px;
@@ -212,7 +212,6 @@
       box-shadow: 0 8px 25px rgba(168, 85, 247, 0.15);
     }
 
-    /* Imagen de la Escuela */
     .school-img {
       width: 100%;
       height: 180px;
@@ -220,7 +219,6 @@
       display: block;
     }
 
-    /* Contenedor del Texto e Información */
     .school-content {
       padding: 1.25rem 1.5rem 1.5rem;
       display: flex;
@@ -260,7 +258,6 @@
       line-height: 1.4;
     }
 
-    /* Badges de Información */
     .badges-container {
       display: flex;
       flex-wrap: wrap;
@@ -292,7 +289,6 @@
       color: #F8FAFC;
     }
 
-    /* Estrellas de Calificación */
     .rating-container {
       margin-bottom: 1rem;
     }
@@ -310,7 +306,6 @@
       color: #312E81;
     }
 
-    /* Botones de Acción */
     .card-actions {
       display: flex;
       gap: 0.6rem;
@@ -357,6 +352,177 @@
       background-color: rgba(168, 85, 247, 0.1);
     }
 
+    /* 5. VENTANAS MODALES */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(15, 12, 33, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-overlay.hidden {
+      display: none;
+    }
+
+    /* Modal de Registro */
+    .modal-card {
+      background-color: #1E1B4B;
+      border: 2px solid #312E81;
+      border-radius: 12px;
+      padding: 2.2rem;
+      width: 90%;
+      max-width: 440px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      font-size: 1.8rem;
+      color: #94A3B8;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+
+    .close-btn:hover {
+      color: #A855F7;
+    }
+
+    .modal-title {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      color: #F8FAFC;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    /* CAMPO DE CONTRASEÑA CON BOTÓN DE VER/OCULTAR */
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrapper input {
+      padding-right: 2.8rem;
+    }
+
+    .btn-toggle-pass {
+      position: absolute;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      color: #94A3B8;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+
+    .btn-toggle-pass:hover {
+      color: #0EA5E9;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: #0F0C21;
+      border: 1px solid #312E81;
+      border-radius: 8px;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus {
+      border-color: #0EA5E9;
+    }
+
+    .btn-confirm {
+      width: 100%;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0EA5E9;
+      color: #0F0C21;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 0.6rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-confirm:hover {
+      background-color: #38BDF8;
+      box-shadow: 0 0 12px rgba(14, 165, 233, 0.4);
+    }
+
+    /* ANUNCIO DE BIENVENIDA TRANSPARENTE Y MÁS GRANDE */
+    .announcement-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background-color: transparent; /* Totalmente transparente */
+      border: none;
+      box-shadow: none;
+      max-width: 650px;
+    }
+
+    .announcement-card .close-btn {
+      top: -0.5rem;
+      right: 0.5rem;
+      font-size: 2.2rem;
+      color: #F8FAFC;
+    }
+
+    .announcement-icon {
+      font-size: 4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .announcement-title {
+      font-family: 'Lora', serif;
+      font-size: 2.6rem; /* Texto más grande */
+      color: #F8FAFC;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .announcement-text {
+      color: #CBD5E1;
+      font-size: 1.25rem; /* Un poco más largo y claro */
+      line-height: 1.6;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 992px) {
       .schools-grid {
@@ -389,6 +555,14 @@
       .btn-search {
         justify-content: center;
       }
+
+      .announcement-title {
+        font-size: 2rem;
+      }
+
+      .announcement-text {
+        font-size: 1.05rem;
+      }
     }
   </style>
 </head>
@@ -403,10 +577,9 @@
 
     <nav>
       <ul class="nav-links">
-        <li><a href="#">Inicio</a></li>
         <li><a href="#">Cómo Funciona</a></li>
         <li><a href="#">Favoritos ♥</a></li>
-        <li><a href="#" class="btn-portal">Acceso Escolar</a></li>
+        <li><button class="btn-portal" id="btnAccesoEscolar">Acceso Escolar</button></li>
       </ul>
     </nav>
   </header>
@@ -654,6 +827,114 @@
 
     </div>
   </main>
+
+  <!-- MODAL DE REGISTRO (ACCESO ESCOLAR) -->
+  <div id="modalRegistro" class="modal-overlay hidden">
+    <div class="modal-card">
+      <span class="close-btn" id="closeRegistro">&times;</span>
+      <h2 class="modal-title">Crear Cuenta</h2>
+      
+      <form id="formRegistro">
+        <div class="form-group">
+          <label for="gmail">Gmail</label>
+          <input type="email" id="gmail" placeholder="ejemplo@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña de Gmail</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" placeholder="Tu contraseña" required>
+            <button type="button" id="btnTogglePass" class="btn-toggle-pass" title="Mostrar/Ocultar contraseña">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="celular">Número de Celular</label>
+          <input type="tel" id="celular" placeholder="Ej: 1123456789" required>
+        </div>
+
+        <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" placeholder="Calle, Número, Localidad" required>
+        </div>
+
+        <button type="submit" class="btn-confirm">Confirmar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ANUNCIO DE BIENVENIDA TRANSPARENTE -->
+  <div id="modalBienvenida" class="modal-overlay hidden">
+    <div class="modal-card announcement-card">
+      <span class="close-btn" id="closeBienvenida">&times;</span>
+      <div class="announcement-icon">🎉</div>
+      <h2 class="announcement-title">¡Bienvenido a Colegio 360!</h2>
+      <p class="announcement-text">Tu portal educativo donde podrás explorar instituciones, comparar orientaciones y encontrar la escuela ideal para tu futuro.</p>
+    </div>
+  </div>
+
+  <!-- LÓGICA EN JAVASCRIPT -->
+  <script>
+    // Elementos del DOM
+    const btnAccesoEscolar = document.getElementById('btnAccesoEscolar');
+    const modalRegistro = document.getElementById('modalRegistro');
+    const closeRegistro = document.getElementById('closeRegistro');
+    const formRegistro = document.getElementById('formRegistro');
+    
+    const passwordInput = document.getElementById('password');
+    const btnTogglePass = document.getElementById('btnTogglePass');
+
+    const modalBienvenida = document.getElementById('modalBienvenida');
+    const closeBienvenida = document.getElementById('closeBienvenida');
+
+    // Función para mostrar / ocultar la contraseña
+    btnTogglePass.addEventListener('click', () => {
+      const isPassword = passwordInput.getAttribute('type') === 'password';
+      passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+      btnTogglePass.textContent = isPassword ? '🙈' : '👁️';
+    });
+
+    // Abrir ventana de registro
+    btnAccesoEscolar.addEventListener('click', (e) => {
+      e.preventDefault();
+      modalRegistro.classList.remove('hidden');
+    });
+
+    // Cerrar ventana de registro
+    closeRegistro.addEventListener('click', () => {
+      modalRegistro.classList.add('hidden');
+    });
+
+    // Procesar envío del formulario (requiere todos los campos llenos)
+    formRegistro.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      modalRegistro.classList.add('hidden');
+      formRegistro.reset();
+      
+      // Restablecer el campo de contraseña a tipo 'password' e ícono inicial
+      passwordInput.setAttribute('type', 'password');
+      btnTogglePass.textContent = '👁️';
+
+      // Mostrar el anuncio de bienvenida
+      modalBienvenida.classList.remove('hidden');
+    });
+
+    // Cerrar anuncio de bienvenida
+    closeBienvenida.addEventListener('click', () => {
+      modalBienvenida.classList.add('hidden');
+    });
+
+    // Cerrar haciendo clic en el fondo exterior
+    window.addEventListener('click', (e) => {
+      if (e.target === modalRegistro) {
+        modalRegistro.classList.add('hidden');
+      }
+      if (e.target === modalBienvenida) {
+        modalBienvenida.classList.add('hidden');
+      }
+    });
+  </script>
 
 </body>
 </html>
