@@ -174,11 +174,20 @@
       box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
     }
 
-    /* 4. SECCIÓN ESCUELAS RECOMENDADAS */
-    .recommended-section {
-      max-width: 1200px;
+    /* 4. LAYOUT PRINCIPAL Y ESCUELAS RECOMENDADAS */
+    .main-layout {
+      width: 100%;
+      max-width: 100%; /* Extendido al máximo ancho posible */
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem 1.5rem;
+      padding: 2.5rem 0.5rem 4rem 2rem; /* Padding derecho reducido a 0.5rem para pegar el filtro a la pantalla */
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .recommended-section {
+      width: 100%;
     }
 
     .section-title {
@@ -191,7 +200,7 @@
 
     .schools-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
 
@@ -352,7 +361,103 @@
       background-color: rgba(168, 85, 247, 0.1);
     }
 
-    /* 5. VENTANAS MODALES */
+    /* 5. PANEL LATERAL DE FILTROS (SIDEBAR) */
+    .filters-sidebar {
+      background-color: #1E1B4B;
+      border: 1px solid #312E81;
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: sticky;
+      top: 90px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #312E81;
+    }
+
+    .sidebar-title {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      color: #F8FAFC;
+    }
+
+    .btn-clear {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .btn-clear:hover {
+      color: #A855F7;
+    }
+
+    .filters-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .filter-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #94A3B8;
+    }
+
+    .filter-group select {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      background-color: #0F0C21;
+      border: 1px solid #312E81;
+      border-radius: 8px;
+      color: #F8FAFC;
+      font-size: 0.9rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .filter-group select:focus {
+      border-color: #0EA5E9;
+    }
+
+    .btn-apply-filters {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      width: 100%;
+      background-color: #0EA5E9;
+      color: #0F0C21;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-apply-filters:hover {
+      background-color: #38BDF8;
+      box-shadow: 0 0 12px rgba(14, 165, 233, 0.4);
+    }
+
+    /* 6. VENTANAS MODALES */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -371,7 +476,6 @@
       display: none;
     }
 
-    /* Modal de Registro */
     .modal-card {
       background-color: #1E1B4B;
       border: 2px solid #312E81;
@@ -418,7 +522,6 @@
       font-weight: 600;
     }
 
-    /* CAMPO DE CONTRASEÑA CON BOTÓN DE VER/OCULTAR */
     .password-wrapper {
       position: relative;
       display: flex;
@@ -485,11 +588,10 @@
       box-shadow: 0 0 12px rgba(14, 165, 233, 0.4);
     }
 
-    /* ANUNCIO DE BIENVENIDA TRANSPARENTE Y MÁS GRANDE */
     .announcement-card {
       text-align: center;
       padding: 2.5rem 1.5rem;
-      background-color: transparent; /* Totalmente transparente */
+      background-color: transparent;
       border: none;
       box-shadow: none;
       max-width: 650px;
@@ -509,7 +611,7 @@
 
     .announcement-title {
       font-family: 'Lora', serif;
-      font-size: 2.6rem; /* Texto más grande */
+      font-size: 2.6rem;
       color: #F8FAFC;
       margin-bottom: 1.2rem;
       line-height: 1.2;
@@ -518,13 +620,23 @@
 
     .announcement-text {
       color: #CBD5E1;
-      font-size: 1.25rem; /* Un poco más largo y claro */
+      font-size: 1.25rem;
       line-height: 1.6;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
     }
 
     /* RESPONSIVE */
     @media (max-width: 992px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+        padding-right: 1.5rem;
+      }
+
+      .filters-sidebar {
+        position: static;
+        order: -1;
+      }
+
       .schools-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -603,230 +715,340 @@
     </form>
   </section>
 
-  <!-- SECCIÓN ESCUELAS RECOMENDADAS -->
-  <main class="recommended-section">
-    <h2 class="section-title">Escuelas Recomendadas</h2>
+  <!-- LAYOUT PRINCIPAL (COLUMNA DE ESCUELAS + PANEL DE FILTROS) -->
+  <div class="main-layout">
 
-    <div class="schools-grid">
+    <!-- COLUMNA IZQUIERDA: ESCUELAS RECOMENDADAS -->
+    <main class="recommended-section">
+      <h2 class="section-title">Escuelas Recomendadas</h2>
 
-      <!-- TARJETA 1 -->
-      <article class="school-card">
-        <img src="colegio cardenal de newman.avif" alt="Colegio Cardenal Newman" class="school-img">
-        <div class="school-content">
-          <div>
-            <div class="school-header">
-              <h3 class="school-name">Colegio Cardenal Newman</h3>
-              <span class="map-icon">📍</span>
-            </div>
-            <p class="school-address">B1609DPO, Eliseo Reclus 1133, Boulogne, Provincia de Buenos Aires</p>
+      <div class="schools-grid">
 
-            <div class="badges-container">
-              <span class="badge badge-gestion">Gestión: Privada</span>
-              <span class="badge badge-nivel">Nivel: Secundario</span>
-              <span class="badge badge-orientacion">Orientación: Bilingüe</span>
-            </div>
-          </div>
+        <!-- TARJETA 1 -->
+        <article class="school-card">
+          <img src="colegio cardenal de newman.avif" alt="Colegio Cardenal Newman" class="school-img">
+          <div class="school-content">
+            <div>
+              <div class="school-header">
+                <h3 class="school-name">Colegio Cardenal Newman</h3>
+                <span class="map-icon">📍</span>
+              </div>
+              <p class="school-address">B1609DPO, Eliseo Reclus 1133, Boulogne, Provincia de Buenos Aires</p>
 
-          <div>
-            <div class="rating-container">
-              <div class="stars">
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
+              <div class="badges-container">
+                <span class="badge badge-gestion">Gestión: Privada</span>
+                <span class="badge badge-nivel">Nivel: Secundario</span>
+                <span class="badge badge-orientacion">Orientación: Bilingüe</span>
               </div>
             </div>
-            <div class="card-actions">
-              <button class="btn-detail">Ver Detalle</button>
-              <button class="btn-save">Guardar</button>
-            </div>
-          </div>
-        </div>
-      </article>
 
-      <!-- TARJETA 2 -->
-      <article class="school-card">
-        <img src="Colegio Nacional de Buenos Aires.jpg" alt="Colegio Nacional de Buenos Aires" class="school-img">
-        <div class="school-content">
-          <div>
-            <div class="school-header">
-              <h3 class="school-name">Colegio Nacional de Buenos Aires (CNBA)</h3>
-              <span class="map-icon">📍</span>
-            </div>
-            <p class="school-address">Bolívar 263, C1066AAE Cdad. Autónoma de Buenos Aires</p>
-
-            <div class="badges-container">
-              <span class="badge badge-gestion">Gestión: Pública</span>
-              <span class="badge badge-nivel">Nivel: Preuniversitario</span>
-              <span class="badge badge-orientacion">Orientación: Humanidades</span>
-            </div>
-          </div>
-
-          <div>
-            <div class="rating-container">
-              <div class="stars">
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
+            <div>
+              <div class="rating-container">
+                <div class="stars">
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn-detail">Ver Detalle</button>
+                <button class="btn-save">Guardar</button>
               </div>
             </div>
-            <div class="card-actions">
-              <button class="btn-detail">Ver Detalle</button>
-              <button class="btn-save">Guardar</button>
-            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- TARJETA 3 -->
-      <article class="school-card">
-        <img src="Colegio Nacional de Monserrat.jfif" alt="Colegio Nacional de Monserrat" class="school-img">
-        <div class="school-content">
-          <div>
-            <div class="school-header">
-              <h3 class="school-name">Colegio Nacional de Monserrat</h3>
-              <span class="map-icon">📍</span>
-            </div>
-            <p class="school-address">Obispo Trejo 294, X5000 Córdoba</p>
+        <!-- TARJETA 2 -->
+        <article class="school-card">
+          <img src="Colegio Nacional de Buenos Aires.jpg" alt="Colegio Nacional de Buenos Aires" class="school-img">
+          <div class="school-content">
+            <div>
+              <div class="school-header">
+                <h3 class="school-name">Colegio Nacional de Buenos Aires (CNBA)</h3>
+                <span class="map-icon">📍</span>
+              </div>
+              <p class="school-address">Bolívar 263, C1066AAE Cdad. Autónoma de Buenos Aires</p>
 
-            <div class="badges-container">
-              <span class="badge badge-gestion">Gestión: Pública</span>
-              <span class="badge badge-nivel">Nivel: Preuniversitario</span>
-              <span class="badge badge-orientacion">Orientación: Humanidades</span>
-            </div>
-          </div>
-
-          <div>
-            <div class="rating-container">
-              <div class="stars">
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-empty">☆</span>
+              <div class="badges-container">
+                <span class="badge badge-gestion">Gestión: Pública</span>
+                <span class="badge badge-nivel">Nivel: Preuniversitario</span>
+                <span class="badge badge-orientacion">Orientación: Humanidades</span>
               </div>
             </div>
-            <div class="card-actions">
-              <button class="btn-detail">Ver Detalle</button>
-              <button class="btn-save">Guardar</button>
-            </div>
-          </div>
-        </div>
-      </article>
 
-      <!-- TARJETA 4 -->
-      <article class="school-card">
-        <img src="Escuela Escocesa San Andrés.jpg" alt="Escuela Escocesa San Andrés" class="school-img">
-        <div class="school-content">
-          <div>
-            <div class="school-header">
-              <h3 class="school-name">Escuela Escocesa San Andrés</h3>
-              <span class="map-icon">📍</span>
-            </div>
-            <p class="school-address">Roque Sáenz Peña 601, B1636 Olivos, Provincia de Buenos Aires</p>
-
-            <div class="badges-container">
-              <span class="badge badge-gestion">Gestión: Privada</span>
-              <span class="badge badge-nivel">Nivel: Secundario</span>
-              <span class="badge badge-orientacion">Orientación: Internacional</span>
-            </div>
-          </div>
-
-          <div>
-            <div class="rating-container">
-              <div class="stars">
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-empty">☆</span>
+            <div>
+              <div class="rating-container">
+                <div class="stars">
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn-detail">Ver Detalle</button>
+                <button class="btn-save">Guardar</button>
               </div>
             </div>
-            <div class="card-actions">
-              <button class="btn-detail">Ver Detalle</button>
-              <button class="btn-save">Guardar</button>
-            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- TARJETA 5 -->
-      <article class="school-card">
-        <img src="Escuela Técnica Roberto Roca.png" alt="Escuela Técnica Roberto Roca" class="school-img">
-        <div class="school-content">
-          <div>
-            <div class="school-header">
-              <h3 class="school-name">Escuela Técnica Roberto Roca</h3>
-              <span class="map-icon">📍</span>
-            </div>
-            <p class="school-address">Colectora Sur 2525 km 71,5, B2804 Campana, Provincia de Buenos Aires</p>
+        <!-- TARJETA 3 -->
+        <article class="school-card">
+          <img src="Colegio Nacional de Monserrat.jfif" alt="Colegio Nacional de Monserrat" class="school-img">
+          <div class="school-content">
+            <div>
+              <div class="school-header">
+                <h3 class="school-name">Colegio Nacional de Monserrat</h3>
+                <span class="map-icon">📍</span>
+              </div>
+              <p class="school-address">Obispo Trejo 294, X5000 Córdoba</p>
 
-            <div class="badges-container">
-              <span class="badge badge-gestion">Gestión: Privada</span>
-              <span class="badge badge-nivel">Nivel: Secundario</span>
-              <span class="badge badge-orientacion">Orientación: Electromecánica</span>
-            </div>
-          </div>
-
-          <div>
-            <div class="rating-container">
-              <div class="stars">
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-empty">☆</span>
+              <div class="badges-container">
+                <span class="badge badge-gestion">Gestión: Pública</span>
+                <span class="badge badge-nivel">Nivel: Preuniversitario</span>
+                <span class="badge badge-orientacion">Orientación: Humanidades</span>
               </div>
             </div>
-            <div class="card-actions">
-              <button class="btn-detail">Ver Detalle</button>
-              <button class="btn-save">Guardar</button>
-            </div>
-          </div>
-        </div>
-      </article>
 
-      <!-- TARJETA 6 -->
-      <article class="school-card">
-        <img src="Escuela Técnica Otto Krause.jpg" alt="Escuela Técnica Otto Krause" class="school-img">
-        <div class="school-content">
-          <div>
-            <div class="school-header">
-              <h3 class="school-name">Escuela Técnica Otto Krause</h3>
-              <span class="map-icon">📍</span>
-            </div>
-            <p class="school-address">Av. Paseo Colón 650, C1063 Cdad. Autónoma de Buenos Aires</p>
-
-            <div class="badges-container">
-              <span class="badge badge-gestion">Gestión: Pública</span>
-              <span class="badge badge-nivel">Nivel: Secundario</span>
-              <span class="badge badge-orientacion">Orientación: Computación</span>
-            </div>
-          </div>
-
-          <div>
-            <div class="rating-container">
-              <div class="stars">
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-filled">★</span>
-                <span class="star-empty">☆</span>
+            <div>
+              <div class="rating-container">
+                <div class="stars">
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-empty">☆</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn-detail">Ver Detalle</button>
+                <button class="btn-save">Guardar</button>
               </div>
             </div>
-            <div class="card-actions">
-              <button class="btn-detail">Ver Detalle</button>
-              <button class="btn-save">Guardar</button>
+          </div>
+        </article>
+
+        <!-- TARJETA 4 -->
+        <article class="school-card">
+          <img src="Escuela Escocesa San Andrés.jpg" alt="Escuela Escocesa San Andrés" class="school-img">
+          <div class="school-content">
+            <div>
+              <div class="school-header">
+                <h3 class="school-name">Escuela Escocesa San Andrés</h3>
+                <span class="map-icon">📍</span>
+              </div>
+              <p class="school-address">Roque Sáenz Peña 601, B1636 Olivos, Provincia de Buenos Aires</p>
+
+              <div class="badges-container">
+                <span class="badge badge-gestion">Gestión: Privada</span>
+                <span class="badge badge-nivel">Nivel: Secundario</span>
+                <span class="badge badge-orientacion">Orientación: Internacional</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="rating-container">
+                <div class="stars">
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-empty">☆</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn-detail">Ver Detalle</button>
+                <button class="btn-save">Guardar</button>
+              </div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-    </div>
-  </main>
+        <!-- TARJETA 5 -->
+        <article class="school-card">
+          <img src="Escuela Técnica Roberto Roca.png" alt="Escuela Técnica Roberto Roca" class="school-img">
+          <div class="school-content">
+            <div>
+              <div class="school-header">
+                <h3 class="school-name">Escuela Técnica Roberto Roca</h3>
+                <span class="map-icon">📍</span>
+              </div>
+              <p class="school-address">Colectora Sur 2525 km 71,5, B2804 Campana, Provincia de Buenos Aires</p>
+
+              <div class="badges-container">
+                <span class="badge badge-gestion">Gestión: Privada</span>
+                <span class="badge badge-nivel">Nivel: Secundario</span>
+                <span class="badge badge-orientacion">Orientación: Electromecánica</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="rating-container">
+                <div class="stars">
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-empty">☆</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn-detail">Ver Detalle</button>
+                <button class="btn-save">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- TARJETA 6 -->
+        <article class="school-card">
+          <img src="Escuela Técnica Otto Krause.jpg" alt="Escuela Técnica Otto Krause" class="school-img">
+          <div class="school-content">
+            <div>
+              <div class="school-header">
+                <h3 class="school-name">Escuela Técnica Otto Krause</h3>
+                <span class="map-icon">📍</span>
+              </div>
+              <p class="school-address">Av. Paseo Colón 650, C1063 Cdad. Autónoma de Buenos Aires</p>
+
+              <div class="badges-container">
+                <span class="badge badge-gestion">Gestión: Pública</span>
+                <span class="badge badge-nivel">Nivel: Secundario</span>
+                <span class="badge badge-orientacion">Orientación: Computación</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="rating-container">
+                <div class="stars">
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-filled">★</span>
+                  <span class="star-empty">☆</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn-detail">Ver Detalle</button>
+                <button class="btn-save">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+    <!-- COLUMNA DERECHA: PANEL LATERAL DE FILTROS -->
+    <aside class="filters-sidebar">
+      <div class="sidebar-header">
+        <h3 class="sidebar-title">Filtrar Escuelas</h3>
+        <button type="reset" form="filter-form" class="btn-clear">Limpiar</button>
+      </div>
+
+      <form id="filter-form" class="filters-form" onsubmit="event.preventDefault();">
+        
+        <!-- 1. Ubicación (Todas las Provincias de Argentina) -->
+        <div class="filter-group">
+          <label for="filter-ubicacion">Ubicación</label>
+          <select id="filter-ubicacion" name="ubicacion">
+            <option value="">Todas las provincias</option>
+            <option value="caba">CABA (Ciudad Autónoma de Buenos Aires)</option>
+            <option value="buenos-aires">Buenos Aires</option>
+            <option value="catamarca">Catamarca</option>
+            <option value="chaco">Chaco</option>
+            <option value="chubut">Chubut</option>
+            <option value="cordoba">Córdoba</option>
+            <option value="corrientes">Corrientes</option>
+            <option value="entre-rios">Entre Ríos</option>
+            <option value="formosa">Formosa</option>
+            <option value="jujuy">Jujuy</option>
+            <option value="la-pampa">La Pampa</option>
+            <option value="la-rioja">La Rioja</option>
+            <option value="mendoza">Mendoza</option>
+            <option value="misiones">Misiones</option>
+            <option value="neuquen">Neuquén</option>
+            <option value="rio-negro">Río Negro</option>
+            <option value="salta">Salta</option>
+            <option value="san-juan">San Juan</option>
+            <option value="san-luis">San Luis</option>
+            <option value="santa-cruz">Santa Cruz</option>
+            <option value="santa-fe">Santa Fe</option>
+            <option value="santiago-del-estero">Santiago del Estero</option>
+            <option value="tierra-del-fuego">Tierra del Fuego, Antártida e Islas del Atlántico Sur</option>
+            <option value="tucuman">Tucumán</option>
+          </select>
+        </div>
+
+        <!-- 2. Nivel Académico -->
+        <div class="filter-group">
+          <label for="filter-nivel">Nivel Académico</label>
+          <select id="filter-nivel" name="nivel">
+            <option value="">Todos los niveles</option>
+            <option value="inicial">Inicial</option>
+            <option value="primario">Primario</option>
+            <option value="secundario">Secundario</option>
+            <option value="terciario">Terciario</option>
+            <option value="universidad">Universidad</option>
+          </select>
+        </div>
+
+        <!-- 3. Jornada -->
+        <div class="filter-group">
+          <label for="filter-jornada">Jornada</label>
+          <select id="filter-jornada" name="jornada">
+            <option value="">Cualquier jornada</option>
+            <option value="manana">Mañana</option>
+            <option value="tarde">Tarde</option>
+            <option value="completa">Completa</option>
+            <option value="extendida">Extendida</option>
+          </select>
+        </div>
+
+        <!-- 4. Orientación -->
+        <div class="filter-group">
+          <label for="filter-orientacion">Orientación</label>
+          <select id="filter-orientacion" name="orientacion">
+            <option value="">Todas las orientaciones</option>
+            <option value="informatica">Informática / Computación</option>
+            <option value="economia">Economía y Administración</option>
+            <option value="arte">Arte</option>
+            <option value="tecnica">Técnica / Electromecánica</option>
+            <option value="humanidades">Humanidades / Bilingüe</option>
+          </select>
+        </div>
+
+        <!-- 5. Modalidad -->
+        <div class="filter-group">
+          <label for="filter-modalidad">Modalidad</label>
+          <select id="filter-modalidad" name="modalidad">
+            <option value="">Todas las modalidades</option>
+            <option value="comun">Común</option>
+            <option value="tecnico-profesional">Técnico-Profesional</option>
+            <option value="especial">Especial</option>
+            <option value="adultos">Adultos</option>
+          </select>
+        </div>
+
+        <!-- 6. Tipo de Gestión -->
+        <div class="filter-group">
+          <label for="filter-gestion">Tipo de Gestión</label>
+          <select id="filter-gestion" name="gestion">
+            <option value="">Cualquier gestión</option>
+            <option value="publica">Pública</option>
+            <option value="privada">Privada</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-apply-filters">Aplicar Filtros</button>
+      </form>
+    </aside>
+
+  </div>
 
   <!-- MODAL DE REGISTRO (ACCESO ESCOLAR) -->
   <div id="modalRegistro" class="modal-overlay hidden">
