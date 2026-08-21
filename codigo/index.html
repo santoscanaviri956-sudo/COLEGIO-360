@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colegio 360 - Recomendador de Colegios</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    /* CABECERA EN AZUL MARINO MEDIO CLARO */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1e3a8a;
+      padding: 12px 5%;
+      border-bottom: 1px solid #1e40af;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .logo-badge {
+      font-size: 1.4rem;
+      background-color: #ffffff;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .logo-text {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.8px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-item {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .nav-item:hover {
+      opacity: 0.8;
+      color: #ffffff;
+    }
+
+    .nav-select {
+      padding: 6px 12px;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      background-color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e3a8a;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .flag-icon {
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      color: #ffffff;
+    }
+
+    /* CONTENIDO PRINCIPAL */
+    .container {
+      max-width: 1100px;
+      margin: 30px auto 60px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: #64748b;
+      font-size: 1.05rem;
+    }
+
+    .quiz-section {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+    }
+
+    .quiz-section h3 {
+      margin-bottom: 6px;
+      color: #1e293b;
+      font-size: 1.25rem;
+    }
+
+    .quiz-section p {
+      color: #64748b;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .quiz-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .quiz-controls select {
+      flex: 1;
+      min-width: 250px;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .quiz-btn {
+      padding: 12px 24px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .search-box {
+      margin-bottom: 30px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    /* GRID Y TARJETAS */
+    .school-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background-color: #e2e8f0;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .card-location {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #eff6ff;
+      color: #2563eb;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+
+    .card-extra {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
+
+    .card-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #0f172a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================
+       FOOTER ESTILO COLEGIO 360
+       ========================================== */
+    .footer {
+      background-color: #0b132b;
+      color: #94a3b8;
+      padding: 50px 5% 20px 5%;
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-badge {
+      font-size: 1.2rem;
+      background-color: #ffffff;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .footer-logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .footer-desc {
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #cbd5e1;
+      max-width: 300px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .social-icon:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: #ffffff;
+    }
+
+    .footer-title {
+      color: #a5b4fc;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #cbd5e1;
+    }
+
+    .contact-icon {
+      font-size: 1.1rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 25px;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+
+    /* Adaptabilidad a dispositivos móviles */
+    @media (max-width: 900px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabecera Colegio 360 -->
+  <header class="navbar">
+    <div class="logo">
+      <div class="logo-badge">🎓</div>
+      <span class="logo-text">colegio 360</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#" class="nav-item">Registra tu colegio</a>
+      
+      <select class="nav-select">
+        <option value="">Rankings</option>
+        <option value="mejores">Mejores Colegios</option>
+        <option value="privados">Colegios Privados</option>
+      </select>
+
+      <a href="#test-section" class="nav-item">Test de afinidad</a>
+
+      <div class="dropdown">
+        <button class="dropdown-btn">Más ▾</button>
+      </div>
+
+      <span class="flag-icon" title="Argentina">🇦🇷</span>
+
+      <div class="user-profile">
+        <span class="user-icon">👤</span>
+        <span class="arrow-down">▾</span>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <section class="hero">
+      <h2>Encuentra el colegio perfecto para tu hijo</h2>
+      <p>Compara opciones, explora instalaciones y elijan juntos la escuela que mejor se adapte a sus gustos e intereses.</p>
+    </section>
+
+    <div class="quiz-section" id="test-section">
+      <h3>🎯 Test de Afinidad para Estudiantes</h3>
+      <p>¿Qué área o actividad te apasiona más?</p>
+      <div class="quiz-controls">
+        <select id="quizInterest">
+          <option value="todos">-- Selecciona tu interés principal --</option>
+          <option value="Tecnología">Tecnología y Robótica</option>
+          <option value="Arte">Arte y Expresión</option>
+          <option value="Deportes">Deportes y Actividad Física</option>
+          <option value="Idiomas">Idiomas / Bilingüe</option>
+        </select>
+        <button class="quiz-btn" onclick="filtrarPorInteres()">Buscar colegio ideal</button>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" onkeyup="filtrarColegios()" placeholder="🔍 Buscar por nombre o zona (ej. San Miguel, Bella Vista)...">
+    </div>
+
+    <div class="school-grid" id="schoolGrid"></div>
+
+  </div>
+
+  <!-- FOOTER COLEGIO 360 -->
+  <footer class="footer">
+    <div class="footer-content">
+      
+      <!-- Columna 1: Brand & Redes -->
+      <div class="footer-col">
+        <div class="footer-logo">
+          <div class="footer-logo-badge">🎓</div>
+          <span class="footer-logo-text">colegio 360</span>
+        </div>
+        <p class="footer-desc">
+          Conectamos estudiantes y familias con los mejores colegios. Información clara, confiable y actualizada para ayudarte a elegir el futuro.
+        </p>
+        <div class="social-icons">
+          <a href="#" class="social-icon" title="Facebook">f</a>
+          <a href="#" class="social-icon" title="Instagram">📷</a>
+          <a href="#" class="social-icon" title="Email">✉</a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Navegación -->
+      <div class="footer-col">
+        <h4 class="footer-title">Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Rankings</a></li>
+          <li><a href="#test-section">Test de afinidad</a></li>
+          <li><a href="#">Registra tu colegio</a></li>
+          <li><a href="#">Más ›</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Información -->
+      <div class="footer-col">
+        <h4 class="footer-title">Información</h4>
+        <ul class="footer-links">
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Términos y condiciones</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Contacto -->
+      <div class="footer-col">
+        <h4 class="footer-title">Contacto</h4>
+        <ul class="contact-list">
+          <li class="contact-item">
+            <span class="contact-icon">📍</span>
+            <span>Buenos Aires, Argentina</span>
+          </li>
+          <li class="contact-item">
+            <span class="contact-icon">✉</span>
+            <span>info@colegio360.com.ar</span>
+          </li>
+          <li class="contact-item">
+            <span class="contact-icon">📞</span>
+            <span>+54 11 1234 5678</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Colegio 360. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    const colegios = [
+      {
+        nombre: "Colegio Tolkien",
+        zona: "San Miguel, Buenos Aires",
+        orientacion: "Idiomas",
+        imagen: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80",
+        descripcion: "Enfoque bilingüe, desarrollo creativo y un ambiente ideal para los estudiantes.",
+        extracurricular: "Teatro, Bilingüe Intensivo, Informática"
+      },
+      {
+        nombre: "Instituto Técnico San José",
+        zona: "San Miguel, Buenos Aires",
+        orientacion: "Tecnología",
+        imagen: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=600&q=80",
+        descripcion: "Especializado en robótica, programación y proyectos de innovación científica.",
+        extracurricular: "Taller de Robótica, Programación Web, Club de Ciencias"
+      },
+      {
+        nombre: "Colegio Deportivo & Arte",
+        zona: "Bella Vista, Buenos Aires",
+        orientacion: "Deportes",
+        imagen: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80",
+        descripcion: "Infraestructura deportiva de alto nivel y programas de expresión artística.",
+        extracurricular: "Fútbol, Natación, Atletismo, Pintura"
+      },
+      {
+        nombre: "Escuela de Bellas Artes",
+        zona: "Muñiz, Buenos Aires",
+        orientacion: "Arte",
+        imagen: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+        descripcion: "Fomentamos el talento musical, artes plásticas y diseño gráfico digital.",
+        extracurricular: "Música, Teatro, Fotografías, Diseño 3D"
+      }
+    ];
+
+    function renderizarColegios(lista) {
+      const grid = document.getElementById("schoolGrid");
+      grid.innerHTML = "";
+
+      if (lista.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 20px;">No se encontraron colegios con esa búsqueda.</p>`;
+        return;
+      }
+
+      lista.forEach(colegio => {
+        const cardHTML = `
+          <div class="card">
+            <img src="${colegio.imagen}" alt="${colegio.nombre}" class="card-img">
+            <div class="card-body">
+              <h3 class="card-title">${colegio.nombre}</h3>
+              <p class="card-location">📍 ${colegio.zona}</p>
+              <div>
+                <span class="badge">${colegio.orientacion}</span>
+              </div>
+              <p class="card-desc">${colegio.descripcion}</p>
+              <p class="card-extra"><strong>Actividades:</strong> ${colegio.extracurricular}</p>
+              <button class="card-btn" onclick="alert('Solicitando información de ${colegio.nombre}...')">Más Información / Contacto</button>
+            </div>
+          </div>
+        `;
+        grid.innerHTML += cardHTML;
+      });
+    }
+
+    function filtrarColegios() {
+      const texto = document.getElementById("searchInput").value.toLowerCase();
+      const filtrados = colegios.filter(c => 
+        c.nombre.toLowerCase().includes(texto) || 
+        c.zona.toLowerCase().includes(texto)
+      );
+      renderizarColegios(filtrados);
+    }
+
+    function filtrarPorInteres() {
+      const interes = document.getElementById("quizInterest").value;
+      if (interes === "todos" || interes === "") {
+        renderizarColegios(colegios);
+      } else {
+        const filtrados = colegios.filter(c => c.orientacion === interes);
+        renderizarColegios(filtrados);
+      }
+    }
+
+    renderizarColegios(colegios);
+  </script>
+</body>
+</html>
