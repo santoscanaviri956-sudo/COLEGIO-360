@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buscador de Escuelas - EscuelAR</title>
+  <title>Colegio 360 - Buscador de Escuelas</title>
   
-  <!-- IMPORTACIÓN DE TIPOGRAFÍAS -->
+  <!-- IMPORTACIÓN DE TIPOGRAFÍAS (Lora para títulos/logo y Plus Jakarta Sans para el resto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* 1. RESET Y PALETA DE COLORES GLOBAL (#0F0C21 & #F8FAFC) */
+    /* 1. RESET Y PALETA DE COLORES GLOBAL */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,7 +19,7 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #0F0C21; /* Fondo General: Azul noche profundo */
       color: #F8FAFC; /* Texto Principal: Blanco hielo */
     }
@@ -38,20 +38,20 @@
     }
 
     .brand {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Lora', serif; /* Tipografía Lora para el Logo */
       display: flex;
       align-items: center;
       gap: 0.5rem;
       text-decoration: none;
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-size: 1.6rem;
+      font-weight: 700;
       color: #F8FAFC;
     }
 
     .brand-icon {
       background-color: #0EA5E9; /* Botón Principal / CTA */
       color: #0F0C21;
-      padding: 0.4rem 0.6rem;
+      padding: 0.3rem 0.6rem;
       border-radius: 8px;
       font-size: 1.1rem;
     }
@@ -103,17 +103,17 @@
     }
 
     .hero-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Lora', serif; /* Tipografía Lora para el Título Principal */
       color: #F8FAFC;
-      font-size: 2.3rem;
-      font-weight: 800;
+      font-size: 2.4rem;
+      font-weight: 700;
       margin-bottom: 0.75rem;
-      max-width: 800px;
+      max-width: 850px;
     }
 
     .hero-subtitle {
       color: #94A3B8;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       margin-bottom: 2rem;
       max-width: 600px;
       line-height: 1.6;
@@ -134,11 +134,11 @@
 
     .search-box:focus-within {
       border-color: #A855F7;
-      box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
     }
 
     .search-input {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       flex: 1;
       border: none;
       outline: none;
@@ -160,7 +160,7 @@
       padding: 0.8rem 1.8rem;
       border-radius: 8px;
       font-size: 1rem;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -169,7 +169,7 @@
     }
 
     .btn-search:hover {
-      background-color: #A855F7; /* Highlight al pasar el mouse */
+      background-color: #A855F7;
       color: #F8FAFC;
       box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
     }
@@ -182,10 +182,10 @@
     }
 
     .section-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Lora', serif; /* Tipografía Lora para el Título de Sección */
       color: #F8FAFC;
-      font-size: 1.8rem;
-      font-weight: 800;
+      font-size: 1.9rem;
+      font-weight: 700;
       margin-bottom: 1.8rem;
     }
 
@@ -222,7 +222,7 @@
     }
 
     .school-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Lora', serif; /* Tipografía Lora para Nombres de Escuelas */
       font-size: 1.15rem;
       font-weight: 700;
       color: #F8FAFC;
@@ -244,7 +244,7 @@
       line-height: 1.4;
     }
 
-    /* Badges de Información (#A855F7 / #0EA5E9) */
+    /* Badges de Información */
     .badges-container {
       display: flex;
       flex-wrap: wrap;
@@ -294,7 +294,7 @@
       color: #312E81;
     }
 
-    /* Botones de Acción */
+    /* Botones de Acción (Plus Jakarta Sans) */
     .card-actions {
       display: flex;
       gap: 0.6rem;
@@ -341,7 +341,7 @@
       background-color: rgba(168, 85, 247, 0.1);
     }
 
-    /* ADAPTACIÓN MÓVIL */
+    /* RESPONSIVE */
     @media (max-width: 992px) {
       .schools-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -382,7 +382,7 @@
   <header class="navbar">
     <a href="#" class="brand">
       <span class="brand-icon">🎓</span>
-      <span>EscuelAR</span>
+      <span>Colegio 360</span>
     </a>
 
     <nav>
