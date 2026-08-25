@@ -29,6 +29,10 @@
     .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.6rem; color: #fff; cursor: pointer; }
     .logo-badge { font-size: 0.9rem; font-weight: 900; background: linear-gradient(135deg, #3b82f6, #1d4ed8); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; box-shadow: 0 4px 12px rgba(59,130,246,0.5); }
     .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .menu-toggle { display:none; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.12); color:#fff; border-radius:10px; padding:9px 11px; cursor:pointer; font-size:1.1rem; }
+    .main-nav { display:flex; gap:18px; margin-left:auto; margin-right:18px; }
+    .main-nav a { color:#cbd5e1; text-decoration:none; font-size:.8rem; font-weight:700; transition:color .2s; }
+    .main-nav a:hover { color:#fff; }
 
     /* BOTONES CON EFECTOS VISUALES */
     .btn {
@@ -56,7 +60,7 @@
 
     /* HERO BANNER CON DETALLES VISUALES */
     .hero-banner {
-      background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px);
+      background:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.96) 62%,rgba(224,242,254,.82) 100%), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80') right center/45% 100% no-repeat; backdrop-filter: blur(12px);
       border-radius: 28px; padding: 40px 30px; margin-bottom: 25px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.8);
       text-align: center; color: #0f172a; position: relative; overflow: hidden;
@@ -66,9 +70,16 @@
       background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 60%);
       pointer-events: none;
     }
+    .hero-banner::after { content:'TECNOLOGÍA · COMUNIDAD · FUTURO'; position:absolute; right:28px; bottom:18px; color:rgba(30,64,175,.62); font-size:.68rem; font-weight:900; letter-spacing:2px; }
     .pill-badge { display: inline-flex; background: #e0e7ff; color: #3730a3; font-size: 0.78rem; font-weight: 800; padding: 6px 16px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
     .hero-banner h2 { font-size: 2.3rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -0.5px; }
     .hero-banner p { color: #475569; max-width: 700px; margin: 0 auto 20px auto; font-size: 1.05rem; line-height: 1.5; }
+    .hero-stats { display:grid; grid-template-columns:repeat(3,1fr); max-width:680px; margin:26px auto 0; border-top:1px solid #e2e8f0; padding-top:20px; gap:12px; }
+    .hero-stat strong { display:block; color:#1d4ed8; font-size:1.35rem; }
+    .hero-stat span { color:#64748b; font-size:.75rem; }
+    .search-heading { color:#0f172a; margin-bottom:12px; font-size:1rem; }
+    .search-panel { grid-template-columns:1.5fr 1fr 1fr 1fr auto; align-items:end; }
+    .search-panel .btn { height:45px; justify-content:center; white-space:nowrap; }
 
     /* PANEL FILTROS MEJORADO */
     .filters-panel {
@@ -97,6 +108,8 @@
       position: relative;
     }
     .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
+    .card { animation: cardIn .45s ease both; }
+    @keyframes cardIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
     .card-img-wrap { position: relative; width: 100%; height: 180px; overflow: hidden; }
     .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
     .card:hover .card-img { transform: scale(1.06); }
@@ -109,6 +122,9 @@
     .badge { background: #eff6ff; color: #2563eb; padding: 5px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; }
     .badge-vacantes { background: #dcfce7; color: #15803d; padding: 5px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 800; }
     .badge-espera { background: #fef3c7; color: #b45309; padding: 5px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 800; }
+    .teacher-badge { display:inline-flex; align-items:center; gap:5px; background:#fff7ed; color:#c2410c; border:1px solid #fed7aa; padding:6px 9px; border-radius:9px; font-size:.72rem; font-weight:800; margin-bottom:10px; }
+    .teacher-callout { background:#fff7ed; border:1px solid #fed7aa; border-radius:13px; padding:13px; margin:14px 0; color:#9a3412; font-size:.84rem; }
+    .teacher-callout strong { display:block; margin-bottom:4px; }
     .card-price { font-size: 1.1rem; font-weight: 900; color: #059669; margin-bottom: 16px; }
 
     .fav-btn-card {
@@ -143,19 +159,36 @@
       transition: transform 0.2s, box-shadow 0.2s; position: relative;
     }
     .assistant-bubble:hover { transform: scale(1.08); box-shadow: 0 12px 30px rgba(37,99,235,0.8); }
-    .assistant-bubble svg { width: 30px; height: 30px; fill: white; pointer-events: none; }
+    .assistant-bubble svg { width: 31px; height: 31px; fill: none; stroke: white; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
     .assistant-badge {
       position: absolute; top: -2px; right: -2px; width: 14px; height: 14px;
       background: #10b981; border: 2px solid #0f172a; border-radius: 50%;
     }
 
     .assistant-box {
-      width: 320px; background: white; color: #0f172a; border-radius: 20px;
+      width: min(380px, calc(100vw - 32px)); background: white; color: #0f172a; border-radius: 20px;
       padding: 18px; box-shadow: 0 20px 40px rgba(0,0,0,0.35); border: 1px solid #e2e8f0;
       display: none; flex-direction: column; gap: 12px; animation: popup 0.25s ease-out;
     }
     @keyframes popup { from { opacity:0; transform: scale(0.8); } to { opacity:1; transform: scale(1); } }
     .assistant-header { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 0.95rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; }
+    .assistant-status { display: flex; align-items: center; gap: 6px; color: #64748b; font-size: 0.72rem; font-weight: 600; }
+    .assistant-status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #10b981; }
+    .assistant-messages { max-height: 235px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 3px; }
+    .assistant-message { max-width: 92%; padding: 9px 11px; border-radius: 12px; font-size: 0.8rem; line-height: 1.4; font-weight: 500; }
+    .assistant-message.bot { background: #f1f5f9; align-self: flex-start; }
+    .assistant-message.user { background: #2563eb; color: white; align-self: flex-end; }
+    .assistant-results { display: flex; flex-direction: column; gap: 6px; }
+    .assistant-result { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 0.76rem; }
+    .assistant-result strong { display: block; font-size: 0.78rem; }
+    .assistant-result small { color: #64748b; }
+    .assistant-result button { border: 0; background: #dbeafe; color: #1d4ed8; border-radius: 7px; padding: 6px 8px; cursor: pointer; font-weight: 700; font-size: 0.7rem; }
+    .assistant-suggestions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .assistant-suggestion { border: 1px solid #bfdbfe; background: #eff6ff; color: #1d4ed8; border-radius: 999px; padding: 6px 9px; cursor: pointer; font-size: 0.7rem; font-weight: 700; }
+    .assistant-input { display: flex; gap: 7px; border-top: 1px solid #f1f5f9; padding-top: 10px; }
+    .assistant-input input { flex: 1; min-width: 0; border: 1px solid #cbd5e1; border-radius: 10px; padding: 9px 10px; outline: none; font-size: 0.8rem; }
+    .assistant-input input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+    .assistant-send { border: 0; border-radius: 10px; background: #2563eb; color: white; padding: 0 12px; cursor: pointer; font-weight: 800; }
 
     /* MODAL GENERAL */
     .modal {
@@ -202,15 +235,101 @@
     .star-rating-select span { font-size: 1.6rem; color: #cbd5e1; transition: color 0.15s, transform 0.15s; }
     .star-rating-select span:hover { transform: scale(1.2); }
     .star-rating-select span.selected { color: #f59e0b; }
+
+    .map-tools, .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .map-tools { margin:-18px 0 18px; flex-wrap:wrap; }
+    .map-tools select { padding:9px 12px; border:1px solid #cbd5e1; border-radius:10px; background:#fff; color:#0f172a; }
+    .map-tools .btn { padding:9px 13px; font-size:.78rem; }
+    .map-legend { display:flex; gap:12px; flex-wrap:wrap; margin:-8px 0 14px; color:#fff; font-size:.75rem; font-weight:700; }
+    .map-legend span { display:inline-flex; align-items:center; gap:5px; }
+    .map-legend i { width:10px; height:10px; border-radius:50%; border:1px solid #fff; }
+    .quick-filters { display:flex; gap:7px; flex-wrap:wrap; margin:-10px 0 17px; }
+    .quick-filters button { border:1px solid #bfdbfe; border-radius:999px; background:#eff6ff; color:#1d4ed8; padding:7px 11px; cursor:pointer; font-size:.74rem; font-weight:800; }
+    .insight-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:24px; margin-top:30px; }
+    .insight-panel { background:#fff; color:#0f172a; border-radius:20px; padding:22px; box-shadow:0 10px 25px rgba(0,0,0,.12); }
+    .insight-panel h3 { margin-bottom:15px; }
+    .ranking-item, .news-item { display:flex; align-items:center; gap:12px; padding:13px 0; border-bottom:1px solid #e2e8f0; }
+    .ranking-item:last-child, .news-item:last-child { border-bottom:0; }
+    .rank-number { font-size:1.2rem; font-weight:900; color:#d97706; min-width:34px; }
+    .ranking-meta, .news-meta { color:#64748b; font-size:.78rem; }
+    .news-icon { font-size:1.35rem; }
+    .detail-hero { display:grid; grid-template-columns:1.2fr 1fr; gap:18px; align-items:start; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:14px 0 22px; }
+    .gallery-grid img { width:100%; height:92px; object-fit:cover; border-radius:10px; }
+    .metric { margin:12px 0; }
+    .metric-label { display:flex; justify-content:space-between; font-size:.82rem; font-weight:800; }
+    .metric-track { height:9px; background:#e2e8f0; border-radius:99px; overflow:hidden; margin-top:5px; }
+    .metric-track span { display:block; height:100%; background:linear-gradient(90deg,#2563eb,#10b981); border-radius:inherit; }
+    .tour-controls { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:8px; }
+    .tour-controls button { border:1px solid #bfdbfe; background:#eff6ff; color:#1d4ed8; border-radius:8px; padding:7px 10px; cursor:pointer; font-weight:700; font-size:.75rem; }
+    .review-filters { display:flex; gap:7px; flex-wrap:wrap; margin:8px 0 12px; }
+    .review-filters button { border:1px solid #cbd5e1; background:#fff; color:#475569; border-radius:999px; padding:6px 10px; cursor:pointer; font-size:.75rem; font-weight:700; }
+    .review-filters button.active { background:#0f172a; color:#fff; border-color:#0f172a; }
+    .favorite-actions { display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap; }
+    .site-footer { margin-top:42px; padding:34px 5% 20px; background:rgba(15,23,42,.94); border-top:1px solid rgba(255,255,255,.18); color:#e2e8f0; }
+    .footer-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:28px; }
+    .footer-brand { font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:9px; }
+    .footer-copy { color:#94a3b8; font-size:.82rem; line-height:1.6; max-width:290px; }
+    .footer-column h4 { color:#fff; font-size:.86rem; margin-bottom:10px; }
+    .footer-column a { display:block; color:#cbd5e1; text-decoration:none; font-size:.82rem; margin:8px 0; }
+    .footer-column a:hover { color:#60a5fa; }
+    .footer-status { display:inline-flex; align-items:center; gap:7px; color:#86efac; font-size:.78rem; }
+    .footer-status::before { content:''; width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 4px rgba(34,197,94,.14); }
+    .footer-bottom { max-width:1200px; margin:25px auto 0; padding-top:15px; border-top:1px solid rgba(255,255,255,.12); color:#94a3b8; font-size:.75rem; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .footer-social { display:flex; gap:8px; margin-top:12px; }
+    .footer-social a { width:29px; height:29px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.25); border-radius:50%; color:#fff; text-decoration:none; font-size:.72rem; font-weight:900; }
+    .mobile-bottom-nav { display:none; }
+    .content-with-sidebar { display:grid; grid-template-columns:230px minmax(0,1fr) 250px; gap:24px; align-items:start; }
+    .results-column { min-width:0; }
+    .side-filter { position:sticky; top:88px; background:#fff; color:#0f172a; border-radius:20px; padding:20px; box-shadow:0 12px 30px rgba(0,0,0,.16); }
+    .side-filter.is-dragged { position:fixed; z-index:1200; width:250px; }
+    .filter-drag-handle { display:flex; align-items:center; justify-content:space-between; gap:8px; cursor:grab; margin:-4px -4px 5px; padding:4px; }
+    .filter-drag-handle:active { cursor:grabbing; }
+    .filter-drag-icon { color:#94a3b8; font-size:1rem; }
+    .left-news { position:sticky; top:88px; }
+    .left-news .insight-panel { padding:18px; }
+    .side-filter h3 { font-size:1.05rem; margin-bottom:5px; }
+    .side-filter > p { color:#64748b; font-size:.78rem; margin-bottom:17px; }
+    .side-filter .filter-group { margin-bottom:14px; }
+    .side-filter select { width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; background:#f8fafc; color:#0f172a; }
+    .side-filter .btn { width:100%; justify-content:center; margin-top:3px; }
+    @media (min-width: 901px) {
+      body { zoom:1.12; }
+      .container { max-width:1400px; padding:0 28px; }
+      .navbar { padding:18px 4%; }
+      .logo { font-size:1.75rem; }
+      .main-nav { gap:22px; }
+      .main-nav a { font-size:.9rem; }
+      .nav-actions { gap:12px; }
+      .nav-actions > .btn { padding:12px 20px; font-size:.95rem; }
+      .content-with-sidebar { grid-template-columns:280px minmax(0,1fr) 300px; gap:30px; }
+      .side-filter { padding:25px; }
+      .side-filter h3 { font-size:1.2rem; }
+      .side-filter > p, .side-filter label { font-size:.9rem; }
+      .side-filter select { padding:12px; font-size:.9rem; }
+      .school-grid { grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:28px; }
+      .card-img-wrap { height:210px; }
+      .card-body { padding:24px; }
+      .card-title { font-size:1.3rem; }
+      .card-location { font-size:.95rem; }
+      .card-price { font-size:1.2rem; }
+      .card-body > div:last-child .btn { font-size:.9rem !important; }
+      .map-tools .btn, .map-tools select { font-size:.9rem; }
+      .insight-panel { padding:26px; }
+      .insight-panel h3 { font-size:1.2rem; }
+      .news-item, .ranking-item { font-size:.95rem; }
+      .news-meta, .ranking-meta { font-size:.85rem; }
+    }
   </style>
 </head>
 <body>
-
   <header class="navbar">
     <div class="logo" onclick="filtrarFavoritos(false)">
       <div class="logo-badge">360</div>
       <span>colegio 360</span>
     </div>
+    <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú">☰</button>
+    <nav class="main-nav"><a href="#inicio">Inicio</a><a href="#searchInput">Buscar colegios</a><a href="#mapContainer">Mapa</a><a href="#compareBar">Comparar</a><a href="#rankingList">Ranking</a><a href="#newsList">Noticias</a></nav>
     <div class="nav-actions">
       <button class="btn btn-secondary" onclick="abrirModal('modalFavs')">Favoritos ❤️ (<span id="favCount">0</span>)</button>
       <button class="btn btn-secondary" onclick="abrirModal('modalCompare')">Comparar (<span id="compareCount">0</span>)</button>
@@ -225,7 +344,7 @@
       </div>
 
       <div id="userProfile" class="user-profile">
-        <span class="user-name" id="displayUserName">Usuario</span>
+        <button class="user-name" id="displayUserName" onclick="abrirPerfil()" style="background:none; border:0; color:inherit; cursor:pointer;">Usuario</button>
         <button class="btn btn-secondary" onclick="cerrarSesion()">Cerrar Sesión</button>
       </div>
     </div>
@@ -233,18 +352,23 @@
 
   <div class="container">
 
-    <section class="hero-banner">
+    <section class="hero-banner" id="inicio">
       <div class="pill-badge">PLATAFORMA INTELIGENTE DE COLEGIOS</div>
       <h2>Encuentra la Escuela Ideal en CABA y Provincia</h2>
       <p>Explora más de 50 colegios geolocalizados, compara características en tiempo real y calcula la afinidad exacta con tu familia.</p>
       <button class="btn btn-primary" style="padding: 14px 32px; font-size: 1rem; margin: 0 auto;" onclick="abrirModal('modalQuiz')">Realizar Test Recomendador</button>
+      <div class="hero-stats"><div class="hero-stat"><strong>+50</strong><span>colegios registrados</span></div><div class="hero-stat"><strong>2.500+</strong><span>familias ayudadas</span></div><div class="hero-stat"><strong>24/7</strong><span>recomendaciones inteligentes</span></div></div>
     </section>
 
-    <div class="filters-panel">
+    <h3 class="search-heading">Buscá tu próximo colegio</h3>
+    <div class="filters-panel search-panel">
       <div class="filter-group">
         <label>Búsqueda Global</label>
-        <input type="text" id="searchInput" oninput="filtrarColegios()" placeholder="Nombre, barrio o zona...">
+        <input type="text" id="searchInput" list="searchSuggestions" oninput="filtrarColegios()" placeholder="Nombre, barrio o zona...">
+        <datalist id="searchSuggestions"><option value="Palermo"><option value="Belgrano"><option value="CABA"><option value="San Isidro"><option value="Escuela Técnica ORT"></datalist>
       </div>
+
+      <div class="filter-group"><label>Nivel educativo</label><select id="levelFilter" onchange="filtrarColegios()"><option value="todos">Todos los niveles</option><option value="Inicial">Inicial</option><option value="Primario">Primario</option><option value="Secundario">Secundario</option><option value="Superior">Superior</option></select></div>
 
       <div class="filter-group">
         <label>Orientación</label>
@@ -271,13 +395,44 @@
           <option value="4.0">4.0 o más</option>
         </select>
       </div>
+      <button class="btn btn-primary" onclick="filtrarColegios(); document.getElementById('schoolGrid').scrollIntoView({behavior:'smooth'});">Buscar colegios</button>
     </div>
 
-    <h3 style="margin-bottom: 12px; font-weight: 800;">Mapa de Geolocalización Escolar</h3>
-    <div id="mapContainer"></div>
+    <div class="content-with-sidebar">
+      <aside class="left-news">
+        <section class="insight-panel"><div class="section-heading"><h3>Últimas noticias</h3><span class="badge">Comunidad</span></div><div id="newsList"></div></section>
+      </aside>
+      <main class="results-column">
+      <h3 style="margin-bottom: 12px; font-weight: 800;">Mapa de Geolocalización Escolar</h3>
+      <div class="map-tools">
+      <button class="btn btn-secondary" style="color:#0f172a; border-color:#cbd5e1;" onclick="ubicarme()">📍 Colegios cerca de mí</button>
+      <label style="color:#fff; font-weight:700; font-size:.85rem;">Distancia <select id="distanceFilter" onchange="filtrarPorDistancia()"><option value="50">Hasta 50 km</option><option value="10">Hasta 10 km</option><option value="5">Hasta 5 km</option></select></label>
+      <select id="travelMode" onchange="actualizarTiemposViaje()"><option value="car">🚗 Auto</option><option value="transit">🚌 Transporte público</option><option value="walk">🚶 Caminando</option></select>
+      </div>
+      <div class="map-legend"><span><i style="background:#16a34a"></i>Públicos</span><span><i style="background:#2563eb"></i>Privados</span><span><i style="background:#7c3aed"></i>Técnicos</span><span><i style="background:#0891b2"></i>Bilingües</span></div>
+      <div id="mapContainer"></div>
 
     <h3 style="margin-bottom: 18px; font-weight: 800;">Instituciones Destacadas</h3>
     <div class="school-grid" id="schoolGrid"></div>
+
+      <div class="insight-grid">
+      <section class="insight-panel"><div class="section-heading"><h3>🏆 Top colegios de CABA</h3><span class="badge">Actualizado hoy</span></div><div id="rankingList"></div></section>
+      </div>
+      </main>
+      <aside class="side-filter">
+        <div class="filter-drag-handle" id="filterDragHandle"><h3>Filtrar colegios</h3><span class="filter-drag-icon">⠿</span></div>
+        <p>Refiná los resultados desde este panel.</p>
+        <div class="filter-group"><label for="sideZoneFilter">Zona</label><select id="sideZoneFilter" onchange="aplicarFiltrosLaterales()"><option value="todos">Todas las zonas</option><option value="CABA">Solo CABA</option><option value="Prov. BSAS">Provincia de Buenos Aires</option></select></div>
+        <div class="filter-group"><label for="sideTypeFilter">Tipo</label><select id="sideTypeFilter" onchange="aplicarFiltrosLaterales()"><option value="todos">Todos los tipos</option><option value="Laico">Laico</option><option value="Religioso">Religioso</option><option value="Técnico">Técnico</option></select></div>
+        <div class="filter-group"><label for="sideShiftFilter">Jornada</label><select id="sideShiftFilter" onchange="aplicarFiltrosLaterales()"><option value="todos">Todas las jornadas</option><option value="Simple">Simple</option><option value="Doble">Doble</option></select></div>
+        <div class="filter-group"><label for="sideVacancyFilter">Vacantes</label><select id="sideVacancyFilter" onchange="aplicarFiltrosLaterales()"><option value="todos">Todas</option><option value="Abiertas">Abiertas</option><option value="Lista de Espera">Lista de espera</option></select></div>
+        <div class="filter-group"><label for="sideLanguageFilter">Idiomas</label><select id="sideLanguageFilter" onchange="aplicarFiltrosLaterales()"><option value="todos">Todos</option><option value="bilingue">Bilingüe</option></select></div>
+        <div class="filter-group"><label for="sideFeatureFilter">Servicios</label><select id="sideFeatureFilter" onchange="aplicarFiltrosLaterales()"><option value="todos">Todos</option><option value="tecnologia">Tecnología</option><option value="deportes">Deportes</option><option value="laboratorio">Laboratorios</option><option value="transporte">Transporte escolar</option></select></div>
+        <label style="display:flex; gap:8px; align-items:center; font-size:.8rem; margin-bottom:14px;"><input type="checkbox" id="sideFullDayFilter" onchange="aplicarFiltrosLaterales()"> Jornada completa</label>
+        <div class="filter-group"><label for="sideSortFilter">Ordenar por</label><select id="sideSortFilter" onchange="aplicarFiltrosLaterales()"><option value="relevancia">Relevancia</option><option value="rating">Mejor valorados</option><option value="price">Menor cuota</option><option value="distance">Más cercanos</option></select></div>
+        <button class="btn btn-dark" onclick="limpiarFiltrosLaterales()">Limpiar filtros</button>
+      </aside>
+    </div>
 
   </div>
 
@@ -289,22 +444,40 @@
   <div class="assistant-wrapper" id="assistantWrapper">
     <div class="assistant-box" id="assistantBox">
       <div class="assistant-header">
-        <span>Asistente Colegio 360</span>
+        <div><span>ColiBot</span><div class="assistant-status">En línea</div></div>
         <button style="background:none; border:none; cursor:pointer; font-weight:bold; color:#64748b;" onclick="toggleAssistantBox()">✕</button>
       </div>
-      <p style="font-size:0.85rem; color:#475569;">¡Hola! Te ayudo a resolver dudas rápidas sobre vacantes, zonas o presupuesto.</p>
-      <div style="display:flex; flex-direction:column; gap:6px;">
-        <button class="btn btn-secondary" style="color:#0f172a; border-color:#cbd5e1; font-size:0.78rem;" onclick="preguntaAsistente('cuotas')">¿Cuáles son los más económicos?</button>
-        <button class="btn btn-secondary" style="color:#0f172a; border-color:#cbd5e1; font-size:0.78rem;" onclick="preguntaAsistente('bilingue')">Ver colegios bilingües</button>
+      <div class="assistant-messages" id="assistantMessages">
+        <div class="assistant-message bot">Hola. Puedo buscar colegios por zona, orientación, cuota, valoración o vacantes. ¿Qué estás buscando?</div>
       </div>
-      <div id="assistantResponse" style="font-size:0.8rem; color:#1e293b; padding-top:6px; font-weight:600;"></div>
+      <div class="assistant-suggestions">
+        <button class="assistant-suggestion" onclick="enviarSugerenciaAsistente('¿Cuáles son los más económicos?')">Más económicos</button>
+        <button class="assistant-suggestion" onclick="enviarSugerenciaAsistente('Quiero un colegio bilingüe')">Bilingües</button>
+        <button class="assistant-suggestion" onclick="enviarSugerenciaAsistente('¿Dónde hay vacantes?')">Con vacantes</button>
+      </div>
+      <form class="assistant-input" onsubmit="enviarMensajeAsistente(event)">
+        <input id="assistantInput" type="text" autocomplete="off" placeholder="Ej: tecnología en Palermo...">
+        <button class="assistant-send" type="submit" aria-label="Enviar consulta">Enviar</button>
+      </form>
     </div>
 
     <div class="assistant-bubble" id="assistantBubble" onclick="toggleAssistantBox()">
       <div class="assistant-badge"></div>
-      <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+      <svg viewBox="0 0 24 24" role="img" aria-label="Asistente de inteligencia artificial"><path d="M12 3v2"/><path d="M9 3h6"/><rect x="4" y="5" width="16" height="14" rx="4"/><path d="M8 11h.01M16 11h.01"/><path d="M8 15c1.2 1 2.4 1.5 4 1.5s2.8-.5 4-1.5"/><path d="M4 10H2M22 10h-2"/></svg>
     </div>
   </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><div class="footer-brand">colegio 360</div><p class="footer-copy">La plataforma para descubrir, comparar y elegir colegios en CABA y Provincia de Buenos Aires.</p><div class="footer-social"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="LinkedIn">in</a></div></div>
+      <div class="footer-column"><h4>Explorar</h4><a href="#schoolGrid">Colegios</a><a href="#mapContainer">Mapa escolar</a><a href="#rankingList">Ranking</a></div>
+      <div class="footer-column"><h4>Tu cuenta</h4><a href="#" onclick="abrirModal('modalFavs'); return false;">Mis favoritos</a><a href="#" onclick="abrirModal('modalCompare'); return false;">Comparar colegios</a><a href="#" onclick="abrirModal('modalQuiz'); return false;">Test recomendador</a></div>
+      <div class="footer-column"><h4>Ayuda y contacto</h4><a href="mailto:hola@colegio360.com">hola@colegio360.com</a><a href="https://wa.me/5491100000000" target="_blank">WhatsApp de admisiones</a><span class="footer-status">Plataforma operativa</span></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Colegio 360</span><span>Información orientativa · CABA y PBA</span></div>
+  </footer>
+
+  <nav class="mobile-bottom-nav"><a href="#inicio"><span>⌂</span>Inicio</a><a href="#searchInput"><span>⌕</span>Buscar</a><a href="#mapContainer"><span>⌖</span>Mapa</a><a href="#" onclick="abrirModal('modalFavs'); return false;"><span>♡</span>Favoritos</a><a href="#" onclick="abrirPerfil(); return false;"><span>●</span>Perfil</a></nav>
 
   <div class="modal" id="modalFavs">
     <div class="modal-body">
@@ -370,7 +543,13 @@
           </select>
         </div>
 
+        <div class="filter-group"><label>3. Zona preferida</label><select id="vZona"><option value="todos">CABA y Provincia</option><option value="CABA">CABA</option><option value="Prov. BSAS">Provincia</option></select></div>
+        <div class="filter-group"><label>4. Tipo de colegio</label><select id="vTipo"><option value="todos">Cualquiera</option><option value="Laico">Laico</option><option value="Religioso">Religioso</option><option value="Técnico">Técnico</option></select></div>
+        <div class="filter-group"><label>5. Distancia máxima</label><select id="vDistancia"><option value="50">Hasta 50 km</option><option value="10">Hasta 10 km</option><option value="5">Hasta 5 km</option></select></div>
+        <div class="filter-group"><label>6. Importancia de idiomas</label><select id="vIdiomas"><option value="0">No es prioridad</option><option value="1">Me interesa</option><option value="2">Es fundamental</option></select></div>
+
         <button class="btn btn-primary" style="padding: 12px; margin-top: 10px; justify-content: center;" onclick="ejecutarMatchingVectorial()">Calcular Coincidencia Matemática</button>
+        <div id="matchingResults"></div>
       </div>
     </div>
   </div>
@@ -390,13 +569,29 @@
     </div>
   </div>
 
+  <div class="modal" id="modalProfile">
+    <div class="modal-body" style="max-width:560px;">
+      <button class="close-btn" onclick="cerrarModal('modalProfile')">✕</button>
+      <h3>Mi perfil</h3>
+      <p style="font-size:.85rem; color:#64748b; margin:6px 0 18px;">Tu espacio para organizar la búsqueda educativa.</p>
+      <div class="insight-grid" style="grid-template-columns:1fr 1fr; margin-top:0; gap:12px;">
+        <div class="insight-panel" style="box-shadow:none; border:1px solid #e2e8f0; padding:15px;"><strong id="profileFavoriteCount">0</strong><p class="ranking-meta">Colegios favoritos</p></div>
+        <div class="insight-panel" style="box-shadow:none; border:1px solid #e2e8f0; padding:15px;"><strong id="profileCompareCount">0</strong><p class="ranking-meta">Comparaciones guardadas</p></div>
+      </div>
+      <h4 style="margin-top:18px;">Recomendaciones personalizadas</h4><p style="font-size:.85rem; color:#64748b; margin-top:6px;">Completá el Test Recomendador para crear sugerencias según tu familia.</p>
+      <h4 style="margin-top:18px;">Historial de búsquedas</h4><p id="profileHistory" style="font-size:.85rem; color:#64748b; margin-top:6px;">Todavía no hay búsquedas guardadas.</p>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
     let authMode = 'login';
+    let gateAuthMode = 'login';
     let currentUser = null;
     let favoritos = [];
     let calificacionSeleccionada = 5;
+    let historialBusquedas = [];
 
     // BASE DE DATOS COMPLETA DE MÁS DE 50 COLEGIOS DE CABA Y PBA
     const colegios = [
@@ -412,6 +607,18 @@
 
     // GENERADOR DINÁMICO
     const zonasList = ["Palermo, CABA", "Belgrano, CABA", "San Isidro, Prov. BSAS", "Tigre, Prov. BSAS", "Avellaneda, Prov. BSAS", "Morón, Prov. BSAS", "Lanús, Prov. BSAS", "Vicente López, Prov. BSAS", "Caballito, CABA", "Devoto, CABA"];
+    const coordenadasZonas = {
+      "Palermo, CABA": [-34.5755, -58.4150],
+      "Belgrano, CABA": [-34.5627, -58.4560],
+      "San Isidro, Prov. BSAS": [-34.4708, -58.5273],
+      "Tigre, Prov. BSAS": [-34.4250, -58.5797],
+      "Avellaneda, Prov. BSAS": [-34.6637, -58.3660],
+      "Morón, Prov. BSAS": [-34.6534, -58.6198],
+      "Lanús, Prov. BSAS": [-34.7062, -58.3915],
+      "Vicente López, Prov. BSAS": [-34.5290, -58.4740],
+      "Caballito, CABA": [-34.6180, -58.4410],
+      "Devoto, CABA": [-34.6030, -58.5120]
+    };
     const orientList = ["Idiomas", "Tecnología", "Deportes", "Arte"];
     const tipoList = ["Laico", "Religioso", "Técnico"];
     const certList = ["Bachiller Bilingüe", "Técnico Profesional", "Bachiller Orientado", "IB Diploma"];
@@ -431,11 +638,14 @@
       const oIdx = i % orientList.length;
       const tIdx = i % tipoList.length;
 
+      const [latCentro, lngCentro] = coordenadasZonas[zonasList[zIdx]];
+      const desplazamiento = ((i % 5) - 2) * 0.002;
+
       colegios.push({
         id: i,
         nombre: `Instituto Educativo Modelo N° ${i}`,
-        lat: -34.6000 + (i * 0.005),
-        lng: -58.4000 - (i * 0.004),
+        lat: latCentro + desplazamiento,
+        lng: lngCentro + desplazamiento,
         zona: zonasList[zIdx],
         orientacion: orientList[oIdx],
         tipo: tipoList[tIdx],
@@ -450,18 +660,104 @@
       });
     }
 
+    const galeriaBase = [
+      ["Edificio", "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=700"],
+      ["Aulas", "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=700"],
+      ["Laboratorios", "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=700"],
+      ["Patio", "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=700"],
+      ["Biblioteca", "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=700"],
+      ["Comedor", "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700"]
+    ];
+    colegios.forEach((col, index) => {
+      col.distancia = Number((1.8 + (index * 1.37) % 26).toFixed(1));
+      col.nivelEducativo = ['Inicial', 'Primario', 'Secundario', 'Superior'][index % 4];
+      col.nivel = 78 + (index * 7) % 22;
+      col.infraestructura = 72 + (index * 9) % 28;
+      col.idiomas = col.orientacion === 'Idiomas' ? 100 : 72 + (index * 5) % 24;
+      col.tecnologia = col.orientacion === 'Tecnología' ? 98 : 68 + (index * 6) % 30;
+      col.idiomasLista = col.orientacion === 'Idiomas' ? 'Inglés, Francés, Portugués' : 'Inglés curricular';
+      col.instalaciones = 'Laboratorio, biblioteca, patio y comedor';
+      col.extracurricular = col.orientacion === 'Tecnología' ? 'Robótica, programación y ciencias' : col.orientacion === 'Deportes' ? 'Fútbol, natación y atletismo' : col.orientacion === 'Arte' ? 'Teatro, música y diseño' : 'Teatro, debate e idiomas';
+      col.historia = `Desde sus inicios, ${col.nombre} acompaña a las familias con una propuesta educativa cercana y orientada al futuro.`;
+      col.buscaDocente = index % 5 === 0 || col.id === 4 || col.id === 7;
+      col.galeria = galeriaBase.map(([nombre, url]) => ({ nombre, url }));
+      col.tour = ['Aula', 'Laboratorio', 'Gimnasio', 'Patio'];
+      col.comentarios = (col.comentarios || []).map((review, reviewIndex) => ({ ...review, perfil: reviewIndex % 2 ? 'Alumno' : 'Padre' }));
+      if (index === 0) col.comentarios.push(
+        { autor: 'María G.', fecha: '22/08/2026', estrellas: 5, perfil: 'Padre', texto: 'Excelente nivel de inglés y profesores.', sent: { label: 'Positivo', color: '#10b981' } },
+        { autor: 'Sofía R.', fecha: '15/08/2026', estrellas: 5, perfil: 'Alumno', texto: 'El laboratorio y las actividades hacen que aprender sea muy entretenido.', sent: { label: 'Positivo', color: '#10b981' } },
+        { autor: 'Tomás P.', fecha: '02/07/2026', estrellas: 4, perfil: 'Exalumno', texto: 'Muy buena preparación para la universidad.', sent: { label: 'Positivo', color: '#10b981' } }
+      );
+    });
+
     let comparador = [];
     let map;
+    let mapMarkers = [];
+    let ubicacionUsuario = { lat: -34.6037, lng: -58.3816 };
+    let filtroPerfil = 'Todos';
 
     // INICIALIZACIÓN DEL MAPA
     function initMap() {
       map = L.map('mapContainer').setView([-34.6037, -58.3816], 10);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+      actualizarMarcadoresMapa();
+    }
 
-      colegios.forEach(col => {
-        L.marker([col.lat, col.lng]).addTo(map)
-          .bindPopup(`<b>${col.nombre}</b><br>${col.zona}<br><br><button class="btn btn-primary" style="padding:4px 8px; font-size:0.75rem;" onclick="verDetalle(${col.id})">Ver Ficha</button>`);
+    function tipoMarcador(col) {
+      if (col.cuota === 0) return 'verde';
+      if (col.orientacion === 'Idiomas') return 'celeste';
+      if (col.orientacion === 'Tecnología' || col.tipo === 'Técnico') return 'violeta';
+      return 'azul';
+    }
+
+    function iconoMarcador(color) {
+      const colores = { verde: '#16a34a', azul: '#2563eb', violeta: '#7c3aed', celeste: '#0891b2' };
+      return L.divIcon({ className: 'school-marker', html: `<span style="display:block;width:17px;height:17px;border-radius:50%;background:${colores[color]};border:3px solid white;box-shadow:0 2px 7px rgba(15,23,42,.45)"></span>`, iconSize: [17, 17], iconAnchor: [8, 8] });
+    }
+
+    function distanciaEntre(origen, destino) {
+      const radioTierra = 6371;
+      const dLat = (destino.lat - origen.lat) * Math.PI / 180;
+      const dLng = (destino.lng - origen.lng) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(origen.lat * Math.PI / 180) * Math.cos(destino.lat * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+      return radioTierra * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function actualizarMarcadoresMapa() {
+      if (!map) return;
+      mapMarkers.forEach(marker => marker.remove());
+      mapMarkers = colegios.filter(col => col.distancia <= Number(document.getElementById('distanceFilter')?.value || 50)).map(col => {
+        const marker = L.marker([col.lat, col.lng], { icon: iconoMarcador(tipoMarcador(col)) }).addTo(map);
+        marker.bindPopup(`<b>${col.nombre}</b><br>${col.zona}<br>${col.distancia} km · ${tiempoViaje(col)}<br><br><button class="btn btn-primary" style="padding:4px 8px; font-size:0.75rem;" onclick="verDetalle(${col.id})">Ver Ficha</button>`);
+        return marker;
       });
+    }
+
+    function tiempoViaje(col) {
+      const distancia = col.distancia || distanciaEntre(ubicacionUsuario, col);
+      const mode = document.getElementById('travelMode')?.value || 'car';
+      const minutos = mode === 'walk' ? distancia * 12 : mode === 'transit' ? distancia * 3.2 : distancia * 2.2;
+      return `${Math.max(5, Math.round(minutos))} min`;
+    }
+
+    function filtrarPorDistancia() {
+      filtrarColegios();
+      actualizarMarcadoresMapa();
+    }
+
+    function actualizarTiemposViaje() {
+      actualizarMarcadoresMapa();
+      filtrarColegios();
+    }
+
+    function ubicarme() {
+      if (!navigator.geolocation) { alert('Tu navegador no permite obtener la ubicación.'); return; }
+      navigator.geolocation.getCurrentPosition(posicion => {
+        ubicacionUsuario = { lat: posicion.coords.latitude, lng: posicion.coords.longitude };
+        colegios.forEach(col => { col.distancia = Number(distanciaEntre(ubicacionUsuario, col).toFixed(1)); });
+        map.setView([ubicacionUsuario.lat, ubicacionUsuario.lng], 11);
+        filtrarPorDistancia();
+      }, () => alert('No pudimos obtener tu ubicación. Podés usar el filtro de distancia manualmente.'));
     }
 
     // ESTRELLAS HTML
@@ -511,13 +807,17 @@
               <div class="tags-row">
                 <span class="badge">${col.orientacion}</span>
                 <span class="badge" style="background:#f1f5f9; color:#475569;">${col.tipo}</span>
+                <span class="badge" style="background:#ecfeff; color:#0e7490;">${col.nivelEducativo}</span>
                 <span class="${col.vacantes === 'Abiertas' ? 'badge-vacantes' : 'badge-espera'}">${col.vacantes}</span>
               </div>
+              ${col.buscaDocente ? '<span class="teacher-badge">👩‍🏫 Se busca docente</span>' : ''}
 
               <p class="card-price">${col.cuota === 0 ? "Gratuito (Público)" : "$" + col.cuota.toLocaleString('es-AR') + " / mes"}</p>
+              <p style="font-size:.78rem; color:#475569; margin-bottom:4px;">🌐 ${col.idiomasLista}</p>
+              <p style="font-size:.78rem; color:#64748b; margin-bottom:8px;">📍 ${col.distancia} km · ${tiempoViaje(col)} en ${document.getElementById('travelMode')?.selectedOptions[0]?.textContent || '🚗 Auto'}</p>
 
               <div style="margin-top:auto; padding-top:10px; display:flex; gap:8px; align-items:center;">
-                <button class="btn btn-dark" style="flex-grow:1; font-size:0.8rem; justify-content:center;" onclick="verDetalle(${col.id})">Ficha & Reseñas</button>
+                <button class="btn btn-dark" style="flex-grow:1; font-size:0.8rem; justify-content:center;" onclick="verDetalle(${col.id})">Ver colegio</button>
                 <label style="font-size:0.75rem; cursor:pointer; font-weight:700;"><input type="checkbox" ${checked} onchange="toggleComparar(${col.id})"> Comparar</label>
               </div>
             </div>
@@ -532,16 +832,62 @@
       const orientacion = document.getElementById("orientFilter").value;
       const cuotaMax = Number(document.getElementById("priceFilter").value);
       const minRating = Number(document.getElementById("ratingFilter").value);
+      const nivel = document.getElementById('levelFilter')?.value || 'todos';
+      const distanciaMax = Number(document.getElementById('distanceFilter')?.value || 50);
+      const zona = document.getElementById('sideZoneFilter')?.value || 'todos';
+      const tipo = document.getElementById('sideTypeFilter')?.value || 'todos';
+      const jornada = document.getElementById('sideShiftFilter')?.value || 'todos';
+      const vacantes = document.getElementById('sideVacancyFilter')?.value || 'todos';
+      const idioma = document.getElementById('sideLanguageFilter')?.value || 'todos';
+      const servicio = document.getElementById('sideFeatureFilter')?.value || 'todos';
+      const jornadaCompleta = document.getElementById('sideFullDayFilter')?.checked || false;
+      const ordenar = document.getElementById('sideSortFilter')?.value || 'relevancia';
+      if (busqueda.length > 2 && historialBusquedas[historialBusquedas.length - 1] !== busqueda) historialBusquedas.push(busqueda);
 
       const filtrados = colegios.filter(col => {
         const coincideBusqueda = col.nombre.toLowerCase().includes(busqueda) || col.zona.toLowerCase().includes(busqueda);
         const coincideOrient = orientacion === "todos" || col.orientacion === orientacion;
         const coincidePrecio = col.cuota <= cuotaMax;
         const coincideRating = col.rating >= minRating;
-        return coincideBusqueda && coincideOrient && coincidePrecio && coincideRating;
+        const coincideNivel = nivel === 'todos' || col.nivelEducativo === nivel;
+        const coincideZona = zona === 'todos' || col.zona.includes(zona);
+        const coincideTipo = tipo === 'todos' || col.tipo === tipo;
+        const coincideJornada = jornada === 'todos' || col.jornada === jornada;
+        const coincideVacantes = vacantes === 'todos' || col.vacantes === vacantes;
+        const coincideIdioma = idioma === 'todos' || col.orientacion === 'Idiomas';
+        const coincideServicio = servicio === 'todos' || (servicio === 'tecnologia' && col.orientacion === 'Tecnología') || (servicio === 'deportes' && col.orientacion === 'Deportes') || (servicio === 'laboratorio' && col.tipo === 'Técnico') || (servicio === 'transporte' && col.jornada === 'Doble');
+        const coincideJornadaCompleta = !jornadaCompleta || col.jornada === 'Doble';
+        return coincideBusqueda && coincideOrient && coincidePrecio && coincideRating && coincideNivel && col.distancia <= distanciaMax && coincideZona && coincideTipo && coincideJornada && coincideVacantes && coincideIdioma && coincideServicio && coincideJornadaCompleta;
       });
 
+      if (ordenar === 'rating') filtrados.sort((a, b) => b.rating - a.rating);
+      if (ordenar === 'price') filtrados.sort((a, b) => a.cuota - b.cuota);
+      if (ordenar === 'distance') filtrados.sort((a, b) => a.distancia - b.distancia);
+
       renderizarGrid(filtrados);
+    }
+
+    function aplicarFiltrosLaterales() { filtrarColegios(); }
+
+    function limpiarFiltrosLaterales() {
+      ['sideZoneFilter', 'sideTypeFilter', 'sideShiftFilter', 'sideVacancyFilter', 'sideLanguageFilter', 'sideFeatureFilter', 'sideSortFilter'].forEach(id => { document.getElementById(id).selectedIndex = 0; });
+      document.getElementById('sideFullDayFilter').checked = false;
+      filtrarColegios();
+    }
+
+    function aplicarBusquedaRapida(tipo) {
+      if (tipo === 'rating') document.getElementById('sideSortFilter').value = 'rating';
+      else if (tipo === 'Abiertas') document.getElementById('sideVacancyFilter').value = 'Abiertas';
+      else document.getElementById('orientFilter').value = tipo;
+      filtrarColegios();
+      document.getElementById('schoolGrid').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderizarInsights() {
+      const ranking = [...colegios].filter(col => col.zona.includes('CABA')).sort((a, b) => b.rating - a.rating).slice(0, 3);
+      document.getElementById('rankingList').innerHTML = ranking.map((col, index) => `<div class="ranking-item"><span class="rank-number">${index + 1}°</span><div><strong>${col.nombre}</strong><div class="ranking-meta">${obtenerEstrellasHTML(col.rating)}</div></div></div>`).join('');
+      const noticias = [['📅', 'Inscripciones 2027 abiertas', 'Admisiones'], ['🎓', 'Feria universitaria', '18 de septiembre'], ['🏆', 'Colegio ganó torneo deportivo', 'Comunidad'], ...ranking.map((col, index) => ['⭐', `${index + 1}° puesto: ${col.nombre}`, `Top CABA · ${col.rating} estrellas`])];
+      document.getElementById('newsList').innerHTML = noticias.map(noticia => `<div class="news-item"><span class="news-icon">${noticia[0]}</span><div><strong>${noticia[1]}</strong><div class="news-meta">${noticia[2]}</div></div></div>`).join('');
     }
 
     // FAVORITOS
@@ -562,7 +908,7 @@
         return;
       }
 
-      container.innerHTML = favs.map(c => `
+      container.innerHTML = `<div class="favorite-actions"><button class="btn btn-primary" onclick="compararFavoritos()">Comparar favoritos</button><button class="btn btn-secondary" style="color:#0f172a; border-color:#cbd5e1;" onclick="compartirFavoritos()">Compartir con familia</button></div>` + favs.map(c => `
         <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #e2e8f0;">
           <div>
             <strong>${c.nombre}</strong>
@@ -573,6 +919,21 @@
       `).join('');
     }
 
+    function compararFavoritos() {
+      comparador = favoritos.slice(0, 3);
+      actualizarEstadoComparador();
+      cerrarModal('modalFavs');
+      renderizarComparativa();
+      abrirModal('modalCompare');
+    }
+
+    function compartirFavoritos() {
+      const texto = favoritos.map(id => colegios.find(c => c.id === id)?.nombre).join(', ');
+      const mensaje = texto ? `Mis colegios favoritos: ${texto}` : 'Todavía no tengo colegios favoritos.';
+      if (navigator.share) navigator.share({ title: 'Mis colegios favoritos', text: mensaje });
+      else navigator.clipboard?.writeText(mensaje).then(() => alert('Lista copiada para compartir con tu familia.'));
+    }
+
     // AUTENTICACIÓN
     function abrirAuthModal(mode) {
       authMode = mode;
@@ -580,6 +941,13 @@
       document.getElementById('groupAuthName').style.display = mode === 'register' ? 'flex' : 'none';
       document.getElementById('authSubmitBtn').innerText = mode === 'login' ? 'Ingresar' : 'Registrarse';
       abrirModal('modalAuth');
+    }
+
+    function abrirPerfil() {
+      document.getElementById('profileFavoriteCount').innerText = favoritos.length;
+      document.getElementById('profileCompareCount').innerText = comparador.length;
+      document.getElementById('profileHistory').innerText = historialBusquedas.length ? historialBusquedas.slice(-5).reverse().join(' · ') : 'Todavía no hay búsquedas guardadas.';
+      abrirModal('modalProfile');
     }
 
     function procesarAuth(event) {
@@ -604,6 +972,32 @@
       document.getElementById('userProfile').style.display = 'none';
     }
 
+    function toggleMobileMenu() {
+      document.querySelector('.nav-actions').classList.toggle('menu-open');
+    }
+
+    function cambiarModoGate() {
+      gateAuthMode = gateAuthMode === 'login' ? 'register' : 'login';
+      const esRegistro = gateAuthMode === 'register';
+      document.getElementById('gateTitle').innerText = esRegistro ? 'Crear cuenta' : 'Iniciar sesión';
+      document.getElementById('gateDescription').innerText = esRegistro ? 'Registrate para guardar favoritos y comparar opciones para tu familia.' : 'Ingresá para explorar colegios, guardar favoritos y comparar opciones para tu familia.';
+      document.getElementById('gateNameGroup').style.display = esRegistro ? 'flex' : 'none';
+      document.getElementById('gateName').required = esRegistro;
+      document.getElementById('gateSubmit').innerText = esRegistro ? 'Registrarme' : 'Ingresar';
+      document.getElementById('gateSwitch').innerText = esRegistro ? '¿Ya tenés cuenta? Iniciá sesión' : '¿No tenés cuenta? Registrate';
+    }
+
+    function procesarAuthGate(event) {
+      event.preventDefault();
+      const email = document.getElementById('gateEmail').value;
+      const name = gateAuthMode === 'register' ? document.getElementById('gateName').value : email.split('@')[0];
+      currentUser = name || 'Usuario';
+      document.getElementById('displayUserName').innerText = currentUser;
+      document.getElementById('guestActions').style.display = 'none';
+      document.getElementById('userProfile').style.display = 'flex';
+      document.getElementById('authGate').style.display = 'none';
+    }
+
     // COMPARADOR
     function toggleComparar(id) {
       if (comparador.includes(id)) { comparador = comparador.filter(item => item !== id); }
@@ -611,10 +1005,14 @@
         if (comparador.length >= 3) { alert("Puedes comparar hasta un máximo de 3 colegios."); return; }
         comparador.push(id);
       }
+      actualizarEstadoComparador();
+      renderizarGrid();
+    }
+
+    function actualizarEstadoComparador() {
       document.getElementById("compareCount").innerText = comparador.length;
       document.getElementById("compareBarCount").innerText = comparador.length;
       document.getElementById("compareBar").style.display = comparador.length > 0 ? "flex" : "none";
-      renderizarGrid();
     }
 
     function renderizarComparativa() {
@@ -623,7 +1021,14 @@
 
       let tableHTML = `<table><tr><th>Característica</th>` + seleccionados.map(s => `<th>${s.nombre}</th>`).join('') + `</tr>`;
       tableHTML += `<tr><td><strong>Cuota Mensual</strong></td>` + seleccionados.map(s => `<td>${s.cuota === 0 ? "Gratuito" : "$" + s.cuota.toLocaleString() + "/mes"}</td>`).join('') + `</tr>`;
+      tableHTML += `<tr><td><strong>Distancia / viaje</strong></td>` + seleccionados.map(s => `<td>${s.distancia} km<br>${tiempoViaje(s)}</td>`).join('') + `</tr>`;
+      tableHTML += `<tr><td><strong>Nivel académico</strong></td>` + seleccionados.map(s => `<td>${s.nivel}%</td>`).join('') + `</tr>`;
       tableHTML += `<tr><td><strong>Orientación</strong></td>` + seleccionados.map(s => `<td>${s.orientacion}</td>`).join('') + `</tr>`;
+      tableHTML += `<tr><td><strong>Idiomas</strong></td>` + seleccionados.map(s => `<td>${s.idiomasLista}</td>`).join('') + `</tr>`;
+      tableHTML += `<tr><td><strong>Instalaciones</strong></td>` + seleccionados.map(s => `<td>${s.instalaciones}</td>`).join('') + `</tr>`;
+      tableHTML += `<tr><td><strong>Tecnología</strong></td>` + seleccionados.map(s => `<td>${s.tecnologia}%</td>`).join('') + `</tr>`;
+      tableHTML += `<tr><td><strong>Opiniones</strong></td>` + seleccionados.map(s => `<td>${s.comentarios.length} reseñas</td>`).join('') + `</tr>`;
+      tableHTML += `<tr><td><strong>Actividades</strong></td>` + seleccionados.map(s => `<td>${s.extracurricular}</td>`).join('') + `</tr>`;
       tableHTML += `<tr><td><strong>Jornada</strong></td>` + seleccionados.map(s => `<td>${s.jornada}</td>`).join('') + `</tr>`;
       tableHTML += `<tr><td><strong>Vacantes</strong></td>` + seleccionados.map(s => `<td>${s.vacantes}</td>`).join('') + `</tr>`;
       tableHTML += `<tr><td><strong>Valoración</strong></td>` + seleccionados.map(s => `<td>${obtenerEstrellasHTML(s.rating)}</td>`).join('') + `</tr></table>`;
@@ -637,13 +1042,89 @@
       box.style.display = box.style.display === "flex" ? "none" : "flex";
     }
 
-    function preguntaAsistente(tipo) {
-      const resp = document.getElementById("assistantResponse");
-      if (tipo === 'cuotas') {
-        resp.innerText = "Los colegios más accesibles son el Colegio Nacional de Buenos Aires (Gratuito) e ILSE ($55.000).";
-      } else if (tipo === 'bilingue') {
-        resp.innerText = "Te recomendamos Belgrano Day School, St. Brendan's o Washington School para orientación bilingüe.";
+    function agregarMensajeAsistente(texto, tipo = 'bot') {
+      const messages = document.getElementById('assistantMessages');
+      const message = document.createElement('div');
+      message.className = `assistant-message ${tipo}`;
+      message.textContent = texto;
+      messages.appendChild(message);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function precioAsistente(colegio) {
+      return colegio.cuota === 0 ? 'Gratuito' : `$${colegio.cuota.toLocaleString('es-AR')} / mes`;
+    }
+
+    function mostrarResultadosAsistente(resultados) {
+      const messages = document.getElementById('assistantMessages');
+      const results = document.createElement('div');
+      results.className = 'assistant-results';
+      resultados.slice(0, 3).forEach(colegio => {
+        const item = document.createElement('div');
+        item.className = 'assistant-result';
+        item.innerHTML = `<div><strong>${colegio.nombre}</strong><small>${colegio.zona} · ${precioAsistente(colegio)}</small></div><button type="button" onclick="verDetalle(${colegio.id})">Ver ficha</button>`;
+        results.appendChild(item);
+      });
+      messages.appendChild(results);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function procesarConsultaAsistente(consulta) {
+      const texto = consulta.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      let resultados = [...colegios];
+      let respuesta = '';
+
+      const orientaciones = {
+        idioma: 'Idiomas', bilingue: 'Idiomas', ingles: 'Idiomas',
+        tecnico: 'Tecnología', técnica: 'Tecnología', técnico: 'Tecnología',
+        tecnologia: 'Tecnología', robotica: 'Tecnología', programacion: 'Tecnología',
+        deporte: 'Deportes', futbol: 'Deportes', arte: 'Arte', diseño: 'Arte'
+      };
+      const orientacion = Object.keys(orientaciones).find(clave => texto.includes(clave));
+      const pideTecnico = /tecnico/.test(texto);
+      const orientacionFlexible = /tecnolog|robot|program/.test(texto) || pideTecnico ? 'Tecnología' : orientacion;
+      const zona = colegios.map(colegio => colegio.zona.split(',')[0].toLowerCase()).find(nombre => texto.includes(nombre));
+      const pideFlores = texto.includes('flores');
+      const pideBaratos = /econom|barat|accesible|cuota|presupuesto/.test(texto);
+      const pideVacantes = /vacante|inscripcion|inscripci|disponible/.test(texto);
+      const pideMejor = /mejor|valorad|rating|puntua/.test(texto);
+
+      if (orientacionFlexible) resultados = resultados.filter(colegio => colegio.orientacion === orientacionFlexible);
+      if (zona) resultados = resultados.filter(colegio => colegio.zona.toLowerCase().startsWith(zona));
+      if (pideFlores && !zona) resultados.sort((a, b) => a.distancia - b.distancia);
+      if (pideVacantes) resultados = resultados.filter(colegio => colegio.vacantes === 'Abiertas');
+      if (pideBaratos) resultados.sort((a, b) => a.cuota - b.cuota);
+      if (pideMejor) resultados.sort((a, b) => b.rating - a.rating);
+
+      if (orientacionFlexible || zona || pideFlores || pideVacantes || pideBaratos || pideMejor) {
+        const cantidad = resultados.length;
+        respuesta = cantidad ? `Encontré ${pideFlores && pideTecnico ? Math.min(5, cantidad) : cantidad} ${cantidad === 1 ? 'opción que coincide' : 'opciones que coinciden'} con tu búsqueda:` : 'No encontré coincidencias exactas. Probá ampliar la zona o el presupuesto.';
+      } else {
+        respuesta = 'Puedo ayudarte con orientación, zona, presupuesto, valoración y vacantes. Por ejemplo: “tecnología en Palermo con vacantes”.';
       }
+
+      agregarMensajeAsistente(respuesta);
+      if (resultados.length) mostrarResultadosAsistente(resultados);
+    }
+
+    function enviarMensajeAsistente(event) {
+      event.preventDefault();
+      const input = document.getElementById('assistantInput');
+      const consulta = input.value.trim();
+      if (!consulta) return;
+      agregarMensajeAsistente(consulta, 'user');
+      input.value = '';
+      procesarConsultaAsistente(consulta);
+    }
+
+    function enviarSugerenciaAsistente(consulta) {
+      document.getElementById('assistantInput').value = consulta;
+      document.querySelector('.assistant-input').requestSubmit();
+    }
+
+    function preguntaAsistente(tipo) {
+      const consultas = { cuotas: '¿Cuáles son los más económicos?', bilingue: 'Quiero un colegio bilingüe' };
+      enviarSugerenciaAsistente(consultas[tipo] || tipo);
     }
 
     // HACER EL ASISTENTE DRAGGABLE (ARRASTRABLE CON EL MOUSE O TOUCH)
@@ -667,27 +1148,55 @@
 
     document.addEventListener('mouseup', () => { isDragging = false; });
 
+    // PANEL DE FILTROS ARRASTRABLE
+    const sideFilter = document.querySelector('.side-filter');
+    const filterDragHandle = document.getElementById('filterDragHandle');
+    let draggingFilter = false;
+    let filterOffsetX = 0;
+    let filterOffsetY = 0;
+
+    filterDragHandle.addEventListener('pointerdown', (event) => {
+      if (window.innerWidth <= 900) return;
+      const rect = sideFilter.getBoundingClientRect();
+      draggingFilter = true;
+      filterOffsetX = event.clientX - rect.left;
+      filterOffsetY = event.clientY - rect.top;
+      sideFilter.classList.add('is-dragged');
+      sideFilter.setPointerCapture(event.pointerId);
+    });
+
+    document.addEventListener('pointermove', (event) => {
+      if (!draggingFilter) return;
+      const maxX = window.innerWidth - sideFilter.offsetWidth - 8;
+      const maxY = window.innerHeight - sideFilter.offsetHeight - 8;
+      sideFilter.style.left = `${Math.max(8, Math.min(event.clientX - filterOffsetX, maxX))}px`;
+      sideFilter.style.top = `${Math.max(8, Math.min(event.clientY - filterOffsetY, maxY))}px`;
+    });
+
+    document.addEventListener('pointerup', (event) => {
+      if (!draggingFilter) return;
+      draggingFilter = false;
+    });
+
     // MATCHING VECTORIAL
     function ejecutarMatchingVectorial() {
       const vecUser = document.getElementById("vOrient").value.split(',').map(Number);
       const cuotaMax = Number(document.getElementById("vCuota").value);
-      
-      let mejorMatch = null;
-      let maxScore = -1;
-
-      colegios.forEach(col => {
-        if (col.cuota <= cuotaMax || cuotaMax === 250000) {
-          const dot = col.vector.reduce((acc, val, idx) => acc + val * vecUser[idx], 0);
-          const magA = Math.sqrt(col.vector.reduce((acc, val) => acc + val*val, 0));
-          const magB = Math.sqrt(vecUser.reduce((acc, val) => acc + val*val, 0));
-          const similarity = dot / (magA * magB);
-
-          if (similarity > maxScore) { maxScore = similarity; mejorMatch = col; }
-        }
-      });
-
-      cerrarModal('modalQuiz');
-      if (mejorMatch) { verDetalle(mejorMatch.id); }
+      const zona = document.getElementById('vZona').value;
+      const tipo = document.getElementById('vTipo').value;
+      const distancia = Number(document.getElementById('vDistancia').value);
+      const idiomasPeso = Number(document.getElementById('vIdiomas').value);
+      const resultados = colegios.map(col => {
+        const dot = col.vector.reduce((acc, val, idx) => acc + val * vecUser[idx], 0);
+        const base = dot ? 55 : 25;
+        const presupuesto = col.cuota <= cuotaMax || cuotaMax === 250000 ? 15 : 0;
+        const coincideZona = zona === 'todos' || col.zona.includes(zona) ? 10 : 0;
+        const coincideTipo = tipo === 'todos' || col.tipo === tipo ? 10 : 0;
+        const coincideDistancia = col.distancia <= distancia ? 5 : 0;
+        const idiomaScore = idiomasPeso === 2 ? (col.orientacion === 'Idiomas' ? 10 : 3) : idiomasPeso === 1 ? (col.orientacion === 'Idiomas' ? 7 : 4) : 5;
+        return { col, score: Math.min(99, base + presupuesto + coincideZona + coincideTipo + coincideDistancia + idiomaScore) };
+      }).sort((a, b) => b.score - a.score).slice(0, 3);
+      document.getElementById('matchingResults').innerHTML = `<div style="margin-top:12px; padding:12px; background:#eff6ff; border-radius:12px;"><strong>Estos colegios tienen mayor compatibilidad contigo</strong>${resultados.map(item => `<div style="display:flex; justify-content:space-between; gap:10px; margin-top:9px; font-size:.82rem;"><span>${item.col.nombre}</span><strong style="color:#059669;">${item.score}% compatible</strong></div>`).join('')}</div>`;
     }
 
     // ANÁLISIS DE SENTIMIENTOS
@@ -712,16 +1221,22 @@
       const content = document.getElementById("detailContent");
 
       content.innerHTML = `
-        <h2>${col.nombre}</h2>
-        <p style="color:#64748b; font-size:0.9rem; margin-bottom:8px;">${col.zona} | Certificación: ${col.cert}</p>
-        <div style="margin-bottom:15px;" id="detailRatingHeader">${obtenerEstrellasHTML(col.rating)}</div>
+        <div class="detail-hero"><div><h2>${col.nombre}</h2><p style="color:#64748b; font-size:0.9rem; margin-bottom:8px;">${col.zona} | ${col.cert}</p><div style="margin-bottom:15px;" id="detailRatingHeader">${obtenerEstrellasHTML(col.rating)}</div><p>${col.descripcion || 'Una propuesta educativa integral para acompañar cada etapa.'}</p><p style="margin-top:10px; font-size:.85rem; color:#475569;"><strong>Historia:</strong> ${col.historia}</p></div><div>${col.galeria.slice(0, 2).map(foto => `<img src="${foto.url}" alt="${foto.nombre} de ${col.nombre}" style="width:100%; height:100px; object-fit:cover; border-radius:12px; margin-bottom:8px;">`).join('')}</div></div>
 
-        <h4>Tour Virtual 360° (Interactivo)</h4>
-        <canvas id="canvas360"></canvas>
+        <h4 style="margin-top:18px;">Galería del colegio</h4>
+        <div class="gallery-grid">${col.galeria.map(foto => `<img src="${foto.url}" alt="${foto.nombre}">`).join('')}</div>
+
+        <div class="detail-hero"><div><h4>Estadísticas del colegio</h4>${[['Nivel académico', col.nivel], ['Infraestructura', col.infraestructura], ['Idiomas', col.idiomas], ['Tecnología', col.tecnologia]].map(m => `<div class="metric"><div class="metric-label"><span>${m[0]}</span><span>${m[1]}%</span></div><div class="metric-track"><span style="width:${m[1]}%"></span></div></div>`).join('')}</div><div><h4>Oferta destacada</h4><p style="margin-top:10px;"><strong>Idiomas:</strong> ${col.idiomasLista}</p><p style="margin-top:8px;"><strong>Instalaciones:</strong> ${col.instalaciones}</p><p style="margin-top:8px;"><strong>Actividades:</strong> ${col.extracurricular}</p></div></div>
+
+        <h4 style="margin-top:20px;">Recorrer colegio virtualmente · 360°</h4>
+        <div class="tour-controls">${col.tour.map((ambiente, index) => `<button onclick="cambiarAmbiente360('${ambiente}', ${index})">${ambiente}</button>`).join('')}</div>
+        <canvas id="canvas360" aria-label="Recorrido virtual 360 grados"></canvas>
 
         <h4 style="margin-top:15px;">Contacto Directo y Entrevista</h4>
+        ${col.buscaDocente ? '<div class="teacher-callout"><strong>📣 Se busca docente para trabajar</strong>Este colegio tiene una búsqueda laboral docente activa. Podés consultar los requisitos y enviar tu CV.</div>' : ''}
         <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
           <a href="https://wa.me/5491100000000?text=Hola,%20quisiera%20pedir%20informaci%C3%B3n%20sobre%20las%20vacantes%20en%20${encodeURIComponent(col.nombre)}" target="_blank" class="btn btn-accent" style="text-decoration:none;">Contactar por WhatsApp</a>
+          ${col.buscaDocente ? `<button class="btn btn-primary" onclick="postularDocente('${col.nombre.replace(/'/g, "\\'")}')">Postularme como docente</button>` : ''}
           <button class="btn btn-secondary" style="color:#0f172a; border-color:#cbd5e1;" onclick="alert('Consulta enviada al equipo de admisión.')">Solicitar Información</button>
         </div>
 
@@ -742,14 +1257,28 @@
           </div>
         </div>
 
-        <h4 style="margin-top:15px;">Opiniones de la Comunidad</h4>
+        <h4 style="margin-top:15px;">Opiniones de alumnos y padres</h4>
+        <div class="review-filters"><button class="active" onclick="filtrarResenas('${col.id}', 'Todos', this)">Todos</button><button onclick="filtrarResenas('${col.id}', 'Padre', this)">Padres</button><button onclick="filtrarResenas('${col.id}', 'Alumno', this)">Alumnos</button><button onclick="filtrarResenas('${col.id}', 'Exalumno', this)">Exalumnos</button></div>
         <div id="revList"></div>
       `;
 
       abrirModal('modalDetail');
       initCanvas360();
+      filtroPerfil = 'Todos';
       seleccionarEstrella(5);
       renderizarResenas(col);
+    }
+
+    function filtrarResenas(id, perfil, boton) {
+      filtroPerfil = perfil;
+      document.querySelectorAll('.review-filters button').forEach(item => item.classList.remove('active'));
+      boton.classList.add('active');
+      renderizarResenas(colegios.find(col => col.id === Number(id)));
+    }
+
+    function postularDocente(nombreColegio) {
+      const asunto = encodeURIComponent(`Postulación docente - ${nombreColegio}`);
+      window.location.href = `mailto:rrhh@colegio360.com?subject=${asunto}&body=${encodeURIComponent('Hola, quisiera postularme para trabajar como docente. Mi CV se encuentra adjunto.')}`;
     }
 
     function seleccionarEstrella(num) {
@@ -794,7 +1323,9 @@
         return;
       }
 
-      container.innerHTML = col.comentarios.map(c => {
+      const comentarios = filtroPerfil === 'Todos' ? col.comentarios : col.comentarios.filter(c => c.perfil === filtroPerfil);
+      if (!comentarios.length) { container.innerHTML = `<p style="font-size:0.85rem; color:#94a3b8; padding:10px 0;">Todavía no hay opiniones de este perfil.</p>`; return; }
+      container.innerHTML = comentarios.map(c => {
         const inicial = c.autor ? c.autor.charAt(0) : 'U';
         return `
           <div class="review-card">
@@ -803,7 +1334,7 @@
                 <div class="avatar-circle">${inicial}</div>
                 <div class="review-user-info">
                   <span class="review-user-name">${c.autor}</span>
-                  <span class="review-date">${c.fecha || 'Reciente'}</span>
+                  <span class="review-date">${c.fecha || 'Reciente'} · ${c.perfil || 'Padre'}</span>
                 </div>
               </div>
               <div style="display:flex; align-items:center; gap:8px;">
@@ -827,16 +1358,26 @@
       let angle = 0;
       setInterval(() => {
         ctx.fillStyle = "#1e293b"; ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "#38bdf8"; ctx.font = "15px sans-serif";
-        ctx.fillText("Recorrido Virtual Panorámico 360° - Ángulo: " + angle + "°", 15, 120);
+        const ambiente = canvas.dataset.ambiente || 'Aula';
+        ctx.fillStyle = "#38bdf8"; ctx.font = "bold 18px sans-serif";
+        ctx.fillText(`Recorrido 360° · ${ambiente}`, 15, 90);
+        ctx.fillStyle = "#cbd5e1"; ctx.font = "14px sans-serif";
+        ctx.fillText(`Vista panorámica · Ángulo ${angle}°`, 15, 120);
         angle = (angle + 1) % 360;
       }, 50);
+    }
+
+    function cambiarAmbiente360(ambiente, indice) {
+      const canvas = document.getElementById('canvas360');
+      if (!canvas) return;
+      canvas.dataset.ambiente = ambiente;
+      canvas.style.background = `linear-gradient(135deg, hsl(${205 + indice * 28} 45% 18%), hsl(${225 + indice * 20} 55% 30%))`;
     }
 
     function abrirModal(id) { document.getElementById(id).style.display = "flex"; }
     function cerrarModal(id) { document.getElementById(id).style.display = "none"; }
 
-    window.onload = () => { initMap(); renderizarGrid(); };
+    window.onload = () => { initMap(); renderizarGrid(); renderizarInsights(); actualizarEstadoComparador(); };
   </script>
 </body>
 </html>
